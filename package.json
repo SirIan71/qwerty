@@ -1,0 +1,11 @@
+{
+  "name": "ironclad",
+  "version": "1.0.0",
+  "description": "IRONCLAD — Premium Gym Fitness Wear",
+  "scripts": {
+    "start": "npx serve . -l ${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
+}

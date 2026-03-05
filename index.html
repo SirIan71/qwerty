@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRONCLAD — Premium Gym Fitness Wear</title>
+  <meta name="description"
+    content="IRONCLAD — Premium gym fitness wear for men and women. Shop high-performance training apparel, gloves, footwear, and accessories.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+
+<body>
+  <!-- NAVIGATION -->
+  <nav id="main-nav">
+    <div class="nav-container">
+      <a href="#" class="logo" data-page="home">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">IRONCLAD</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#" data-page="home" class="nav-link active">Home</a>
+        <a href="#" data-page="shop" class="nav-link">Shop</a>
+        <a href="#" data-page="blog" class="nav-link">Blog</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode">☀️</button>
+        <a href="#" data-page="cart" class="cart-btn" id="cart-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="20" cy="21" r="1" />
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HOME PAGE ===== -->
+  <main id="page-home" class="page active">
+    <!-- HERO -->
+    <section class="hero" id="hero-section">
+      <div class="hero-bg-overlay"></div>
+      <div class="hero-particles" id="hero-particles"></div>
+      <div class="hero-content">
+        <p class="hero-tag animate-up">PREMIUM FITNESS WEAR</p>
+        <h1 class="hero-title animate-up delay-1">TRAIN HARDER.<br>LOOK SHARPER.</h1>
+        <p class="hero-subtitle animate-up delay-2">Engineered for performance. Designed for style.<br>Elevate every rep
+          with IRONCLAD gear.</p>
+        <div class="hero-cta animate-up delay-3">
+          <a href="#" data-page="shop" class="btn btn-primary btn-lg">SHOP NOW</a>
+          <a href="#" data-page="shop" data-filter="new" class="btn btn-outline btn-lg">NEW ARRIVALS</a>
+        </div>
+        <div class="hero-stats animate-up delay-4">
+          <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">Athletes</span></div>
+          <div class="stat"><span class="stat-num">200+</span><span class="stat-label">Products</span></div>
+          <div class="stat"><span class="stat-num">4.9★</span><span class="stat-label">Rating</span></div>
+        </div>
+      </div>
+      <div class="hero-scroll-indicator">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section categories-section" id="categories-section">
+      <div class="container">
+        <h2 class="section-title">SHOP BY CATEGORY</h2>
+        <p class="section-subtitle">Find the perfect gear for every muscle group</p>
+        <div class="categories-grid">
+          <a href="#" class="category-card" data-page="shop" data-category="headwear">
+            <div class="category-icon">🧢</div>
+            <h3>Headwear</h3>
+            <p>Caps, Headbands & Beanies</p>
+          </a>
+          <a href="#" class="category-card" data-page="shop" data-category="handwear">
+            <div class="category-icon">🧤</div>
+            <h3>Handwear</h3>
+            <p>Gloves, Wraps & Grips</p>
+          </a>
+          <a href="#" class="category-card large" data-page="shop" data-category="upperwear">
+            <div class="category-icon">👕</div>
+            <h3>Upperwear</h3>
+            <p>Tanks, Tees, Hoodies & Sports Bras</p>
+          </a>
+          <a href="#" class="category-card large" data-page="shop" data-category="lowerwear">
+            <div class="category-icon">🩳</div>
+            <h3>Lowerwear</h3>
+            <p>Shorts, Leggings & Joggers</p>
+          </a>
+          <a href="#" class="category-card" data-page="shop" data-category="footwear">
+            <div class="category-icon">👟</div>
+            <h3>Footwear</h3>
+            <p>Training Shoes & Socks</p>
+          </a>
+          <a href="#" class="category-card" data-page="shop" data-category="accessories">
+            <div class="category-icon">🎒</div>
+            <h3>Accessories</h3>
+            <p>Bags, Belts & Shakers</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="section featured-section" id="featured-section">
+      <div class="container">
+        <h2 class="section-title">BEST SELLERS</h2>
+        <p class="section-subtitle">Our most loved gear by athletes worldwide</p>
+        <div class="products-grid" id="featured-products"></div>
+        <div class="section-cta">
+          <a href="#" data-page="shop" class="btn btn-primary">VIEW ALL PRODUCTS</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENDER SPLIT -->
+    <section class="section gender-section">
+      <div class="gender-split">
+        <a href="#" class="gender-card" data-page="shop" data-gender="men">
+          <div class="gender-overlay"></div>
+          <div class="gender-content">
+            <h2>MEN'S</h2>
+            <p>Performance wear engineered for power</p>
+            <span class="btn btn-outline">SHOP MEN</span>
+          </div>
+        </a>
+        <a href="#" class="gender-card" data-page="shop" data-gender="women">
+          <div class="gender-overlay"></div>
+          <div class="gender-content">
+            <h2>WOMEN'S</h2>
+            <p>Athletic wear designed for strength & style</p>
+            <span class="btn btn-outline">SHOP WOMEN</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="section why-section">
+      <div class="container">
+        <h2 class="section-title">WHY IRONCLAD?</h2>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-icon">🔬</div>
+            <h3>Performance Fabric</h3>
+            <p>Moisture-wicking, breathable materials engineered for peak performance during intense workouts.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">♻️</div>
+            <h3>Sustainable</h3>
+            <p>Eco-friendly materials and processes. Look good, feel good, and do good for the planet.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">💪</div>
+            <h3>Athletic Fit</h3>
+            <p>Designed to move with you. Every stitch engineered for range-of-motion and comfort.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">🚚</div>
+            <h3>Free Shipping</h3>
+            <p>Free shipping on all orders over $75. Fast delivery, hassle-free returns within 30 days.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="section newsletter-section">
+      <div class="container">
+        <div class="newsletter-card">
+          <h2>JOIN THE IRONCLAD ARMY</h2>
+          <p>Get 15% off your first order + exclusive drops, training tips & nutrition guides.</p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="btn btn-primary">SUBSCRIBE</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHOP PAGE ===== -->
+  <main id="page-shop" class="page">
+    <section class="shop-hero">
+      <h1>SHOP ALL GEAR</h1>
+      <p>Filter by gender, category, or browse our entire collection</p>
+    </section>
+    <section class="shop-content container">
+      <aside class="shop-sidebar" id="shop-sidebar">
+        <button class="filter-close-btn" id="filter-close-btn">✕ Close</button>
+        <div class="filter-group">
+          <h3>Gender</h3>
+          <label><input type="radio" name="gender" value="all" checked> All</label>
+          <label><input type="radio" name="gender" value="men"> Men</label>
+          <label><input type="radio" name="gender" value="women"> Women</label>
+          <label><input type="radio" name="gender" value="unisex"> Unisex</label>
+        </div>
+        <div class="filter-group">
+          <h3>Category</h3>
+          <label><input type="radio" name="category" value="all" checked> All</label>
+          <label><input type="radio" name="category" value="headwear"> 🧢 Headwear</label>
+          <label><input type="radio" name="category" value="handwear"> 🧤 Handwear</label>
+          <label><input type="radio" name="category" value="upperwear"> 👕 Upperwear</label>
+          <label><input type="radio" name="category" value="lowerwear"> 🩳 Lowerwear</label>
+          <label><input type="radio" name="category" value="footwear"> 👟 Footwear</label>
+          <label><input type="radio" name="category" value="accessories"> 🎒 Accessories</label>
+        </div>
+        <div class="filter-group">
+          <h3>Sort By</h3>
+          <select id="sort-select">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name A–Z</option>
+          </select>
+        </div>
+        <button class="btn btn-outline btn-sm" id="clear-filters">Clear Filters</button>
+      </aside>
+      <div class="shop-main">
+        <div class="shop-toolbar">
+          <span id="product-count">0 products</span>
+          <button class="filter-toggle-btn" id="filter-toggle-btn">Filters</button>
+        </div>
+        <div class="products-grid" id="shop-products"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PRODUCT DETAIL PAGE ===== -->
+  <main id="page-product" class="page">
+    <div class="container product-detail" id="product-detail"></div>
+  </main>
+
+  <!-- ===== CART PAGE ===== -->
+  <main id="page-cart" class="page">
+    <section class="container cart-page">
+      <h1 class="page-title">YOUR CART</h1>
+      <div class="cart-layout">
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-summary" id="cart-summary"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== CHECKOUT PAGE ===== -->
+  <main id="page-checkout" class="page">
+    <section class="container checkout-page">
+      <h1 class="page-title">CHECKOUT</h1>
+      <div class="checkout-layout">
+        <form class="checkout-form" id="checkout-form">
+          <div class="checkout-section">
+            <h2>Contact Information</h2>
+            <div class="form-row">
+              <div class="form-group"><label>Email</label><input type="email" required placeholder="you@example.com">
+              </div>
+              <div class="form-group"><label>Phone</label><input type="tel" placeholder="+1 (555) 000-0000"></div>
+            </div>
+          </div>
+          <div class="checkout-section">
+            <h2>Shipping Address</h2>
+            <div class="form-row">
+              <div class="form-group"><label>First Name</label><input type="text" required></div>
+              <div class="form-group"><label>Last Name</label><input type="text" required></div>
+            </div>
+            <div class="form-group"><label>Address</label><input type="text" required></div>
+            <div class="form-row">
+              <div class="form-group"><label>City</label><input type="text" required></div>
+              <div class="form-group"><label>State</label><input type="text" required></div>
+              <div class="form-group"><label>ZIP Code</label><input type="text" required></div>
+            </div>
+            <div class="form-group"><label>Country</label>
+              <select required>
+                <option value="">Select Country</option>
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="UK">United Kingdom</option>
+                <option value="AU">Australia</option>
+                <option value="KE">Kenya</option>
+              </select>
+            </div>
+          </div>
+          <div class="checkout-section">
+            <h2>Payment Method</h2>
+            <div class="payment-methods">
+              <label class="payment-option active"><input type="radio" name="payment" value="card" checked><span
+                  class="payment-label">💳 Credit/Debit Card</span></label>
+              <label class="payment-option"><input type="radio" name="payment" value="paypal"><span
+                  class="payment-label">🅿️ PayPal</span></label>
+              <label class="payment-option"><input type="radio" name="payment" value="mpesa"><span
+                  class="payment-label">📱 M-Pesa</span></label>
+            </div>
+            <div id="card-fields">
+              <div class="form-group"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456"
+                  maxlength="19"></div>
+              <div class="form-row">
+                <div class="form-group"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5"></div>
+                <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="4"></div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-full">PLACE ORDER</button>
+        </form>
+        <div class="checkout-summary" id="checkout-summary"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== BLOG PAGE ===== -->
+  <main id="page-blog" class="page">
+    <section class="blog-hero">
+      <h1>THE IRONCLAD JOURNAL</h1>
+      <p>Training tips, nutrition guides & fitness wisdom</p>
+    </section>
+    <section class="container blog-content">
+      <div class="blog-filters">
+        <button class="blog-filter active" data-blog-cat="all">All</button>
+        <button class="blog-filter" data-blog-cat="nutrition">🥗 Nutrition</button>
+        <button class="blog-filter" data-blog-cat="exercises">💪 Exercises</button>
+        <button class="blog-filter" data-blog-cat="lifestyle">🧘 Lifestyle</button>
+      </div>
+      <div class="blog-grid" id="blog-grid"></div>
+    </section>
+  </main>
+
+  <!-- ===== BLOG POST PAGE ===== -->
+  <main id="page-blogpost" class="page">
+    <article class="container blog-post-detail" id="blog-post-detail"></article>
+  </main>
+
+  <!-- ===== ORDER CONFIRMATION ===== -->
+  <main id="page-confirmation" class="page">
+    <section class="container confirmation-page">
+      <div class="confirmation-card">
+        <div class="confirmation-icon">✅</div>
+        <h1>ORDER CONFIRMED!</h1>
+        <p class="confirmation-order-id"></p>
+        <p>Thank you for your purchase! Your order has been placed successfully. You will receive a confirmation email
+          shortly.</p>
+        <div class="confirmation-actions">
+          <a href="#" data-page="shop" class="btn btn-primary">CONTINUE SHOPPING</a>
+          <a href="#" data-page="home" class="btn btn-outline">BACK TO HOME</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <span class="logo"><span class="logo-icon">⚡</span><span class="logo-text">IRONCLAD</span></span>
+        <p>Premium gym fitness wear engineered for athletes who demand the best.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Shop</h4>
+        <a href="#" data-page="shop" data-gender="men">Men</a>
+        <a href="#" data-page="shop" data-gender="women">Women</a>
+        <a href="#" data-page="shop" data-category="upperwear">Upperwear</a>
+        <a href="#" data-page="shop" data-category="footwear">Footwear</a>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#" data-page="blog">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Support</h4>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Size Guide</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 IRONCLAD. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Twitter">🐦</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="YouTube">▶️</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
+  <script src="data.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+</body>
+
+</html>
