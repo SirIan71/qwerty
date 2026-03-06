@@ -1,7 +1,7 @@
 {
-  "name": "ironclad",
+  "name": "IRONCLAD",
   "version": "1.0.0",
-  "description": "IRONCLAD — Premium Gym Fitness Wear",
+  "description": "Fitflex — Premium Gym Fitness Wear",
   "scripts": {
     "start": "npx serve . -l ${PORT:-3000}"
   },

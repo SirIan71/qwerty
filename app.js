@@ -1,7 +1,7 @@
-// ===== IRONCLAD — GYM FITNESS WEAR E-COMMERCE =====
+// ===== Fitflex — GYM FITNESS WEAR E-COMMERCE =====
 // App State
 const state = {
-  cart: JSON.parse(localStorage.getItem('ironclad_cart')) || [],
+  cart: JSON.parse(localStorage.getItem('Fitflex_cart')) || [],
   currentPage: 'home',
   currentProduct: null,
   currentBlogPost: null,
@@ -379,7 +379,7 @@ function updateCartQty(index, newQty) {
 }
 
 function saveCart() {
-  localStorage.setItem('ironclad_cart', JSON.stringify(state.cart));
+  localStorage.setItem('Fitflex_cart', JSON.stringify(state.cart));
 }
 
 function updateCartCount() {
@@ -593,7 +593,7 @@ function renderBlogPostDetail() {
 function initNewsletter() {
   document.getElementById('newsletter-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    showToast('🎉 Welcome to the IRONCLAD army! Check your inbox for 15% off.');
+    showToast('🎉 Welcome to the Fitflex army! Check your inbox for 15% off.');
     e.target.reset();
   });
 }
@@ -706,7 +706,7 @@ function initThemeToggle() {
   if (!toggle) return;
 
   // Load saved theme
-  const savedTheme = localStorage.getItem('ironclad_theme') || 'dark';
+  const savedTheme = localStorage.getItem('Fitflex_theme') || 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
   updateToggleIcon(toggle, savedTheme);
 
@@ -714,7 +714,7 @@ function initThemeToggle() {
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('ironclad_theme', next);
+    localStorage.setItem('Fitflex_theme', next);
     updateToggleIcon(toggle, next);
   });
 }
