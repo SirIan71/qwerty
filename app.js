@@ -275,7 +275,7 @@ function renderProductDetail() {
         
         <div class="product-options">
           <div class="option-group">
-            <label>Size</label>
+            <label>${p.category === 'nutrition' ? 'Flavor / Size' : 'Size'}</label>
             <div class="size-options" id="size-options">
               ${p.sizes.map((s, i) => `<button class="size-btn ${i === 0 ? 'active' : ''}" data-size="${s}">${s}</button>`).join('')}
             </div>

@@ -1,61 +1,69 @@
 // ===== PRODUCT DATA =====
 const PRODUCTS = [
-    // HEADWEAR
-    { id: 1, name: "Stealth Performance Cap", price: 29.99, category: "headwear", gender: "unisex", image: "🧢", color: "#1a1a1a", sizes: ["S/M", "L/XL"], rating: 4.8, reviews: 234, badge: "bestseller", description: "Lightweight, moisture-wicking cap with curved brim and adjustable snapback. UV protection fabric keeps you cool during outdoor training.", features: ["Moisture-wicking fabric", "UV protection UPF 50+", "Adjustable snapback closure", "Laser-cut ventilation holes", "Reflective logo detail"] },
-    { id: 2, name: "Compression Headband", price: 14.99, category: "headwear", gender: "unisex", image: "🎽", color: "#333", sizes: ["One Size"], rating: 4.6, reviews: 189, description: "Keep sweat out of your eyes with this ultra-stretch compression headband. Features silicone grip strips for a stay-put fit.", features: ["Ultra-stretch fabric", "Silicone grip strips", "Quick-dry technology", "Anti-slip design", "Machine washable"] },
-    { id: 3, name: "Thermal Training Beanie", price: 24.99, category: "headwear", gender: "unisex", image: "🧢", color: "#222", sizes: ["One Size"], rating: 4.7, reviews: 156, badge: "new", description: "Fleece-lined thermal beanie perfect for cold-weather outdoor training. Breathable yet insulating to keep your head warm without overheating.", features: ["Fleece-lined interior", "Breathable mesh panels", "Reflective detailing", "Wind-resistant", "Lightweight construction"] },
+  // HEADWEAR
+  { id: 1, name: "Stealth Performance Cap", price: 29.99, category: "headwear", gender: "unisex", image: "🧢", color: "#1a1a1a", sizes: ["S/M", "L/XL"], rating: 4.8, reviews: 234, badge: "bestseller", description: "Lightweight, moisture-wicking cap with curved brim and adjustable snapback. UV protection fabric keeps you cool during outdoor training.", features: ["Moisture-wicking fabric", "UV protection UPF 50+", "Adjustable snapback closure", "Laser-cut ventilation holes", "Reflective logo detail"] },
+  { id: 2, name: "Compression Headband", price: 14.99, category: "headwear", gender: "unisex", image: "🎽", color: "#333", sizes: ["One Size"], rating: 4.6, reviews: 189, description: "Keep sweat out of your eyes with this ultra-stretch compression headband. Features silicone grip strips for a stay-put fit.", features: ["Ultra-stretch fabric", "Silicone grip strips", "Quick-dry technology", "Anti-slip design", "Machine washable"] },
+  { id: 3, name: "Thermal Training Beanie", price: 24.99, category: "headwear", gender: "unisex", image: "🧢", color: "#222", sizes: ["One Size"], rating: 4.7, reviews: 156, badge: "new", description: "Fleece-lined thermal beanie perfect for cold-weather outdoor training. Breathable yet insulating to keep your head warm without overheating.", features: ["Fleece-lined interior", "Breathable mesh panels", "Reflective detailing", "Wind-resistant", "Lightweight construction"] },
 
-    // HANDWEAR
-    { id: 4, name: "Pro Lifting Gloves", price: 39.99, category: "handwear", gender: "unisex", image: "🧤", color: "#111", sizes: ["S", "M", "L", "XL"], rating: 4.9, reviews: 567, badge: "bestseller", description: "Premium leather palm lifting gloves with integrated wrist support. Double-stitched for maximum durability during heavy deadlifts and rows.", features: ["Genuine leather palms", "Integrated wrist wraps", "Padded palm protection", "Double-stitched seams", "Ventilated mesh back"] },
-    { id: 5, name: "Competition Wrist Wraps", price: 24.99, category: "handwear", gender: "unisex", image: "🤜", color: "#1a1a1a", sizes: ["18\"", "24\""], rating: 4.8, reviews: 412, description: "Stiff competition-grade wrist wraps providing maximum support during heavy pressing movements. Thumb loop and velcro closure for secure fit.", features: ["Heavy-duty cotton blend", "Thumb loop attachment", "Hook & loop closure", "IPF approved stiffness", "Available in 18\" and 24\""] },
-    { id: 6, name: "Grip Training Gloves", price: 34.99, category: "handwear", gender: "unisex", image: "🧤", color: "#2a2a2a", sizes: ["S", "M", "L", "XL"], rating: 4.7, reviews: 298, badge: "new", description: "Silicone-padded grip gloves designed for CrossFit and functional training. Half-finger design allows natural feel while protecting your palms.", features: ["Silicone grip pads", "Half-finger design", "Pull-tab for easy removal", "Anti-blister technology", "Reinforced stitching"] },
+  // HANDWEAR
+  { id: 4, name: "Pro Lifting Gloves", price: 39.99, category: "handwear", gender: "unisex", image: "🧤", color: "#111", sizes: ["S", "M", "L", "XL"], rating: 4.9, reviews: 567, badge: "bestseller", description: "Premium leather palm lifting gloves with integrated wrist support. Double-stitched for maximum durability during heavy deadlifts and rows.", features: ["Genuine leather palms", "Integrated wrist wraps", "Padded palm protection", "Double-stitched seams", "Ventilated mesh back"] },
+  { id: 5, name: "Competition Wrist Wraps", price: 24.99, category: "handwear", gender: "unisex", image: "🤜", color: "#1a1a1a", sizes: ["18\"", "24\""], rating: 4.8, reviews: 412, description: "Stiff competition-grade wrist wraps providing maximum support during heavy pressing movements. Thumb loop and velcro closure for secure fit.", features: ["Heavy-duty cotton blend", "Thumb loop attachment", "Hook & loop closure", "IPF approved stiffness", "Available in 18\" and 24\""] },
+  { id: 6, name: "Grip Training Gloves", price: 34.99, category: "handwear", gender: "unisex", image: "🧤", color: "#2a2a2a", sizes: ["S", "M", "L", "XL"], rating: 4.7, reviews: 298, badge: "new", description: "Silicone-padded grip gloves designed for CrossFit and functional training. Half-finger design allows natural feel while protecting your palms.", features: ["Silicone grip pads", "Half-finger design", "Pull-tab for easy removal", "Anti-blister technology", "Reinforced stitching"] },
 
-    // UPPERWEAR - MEN
-    { id: 7, name: "Apex Performance Tank", price: 34.99, category: "upperwear", gender: "men", image: "🎽", color: "#0a0a0a", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.8, reviews: 823, badge: "bestseller", description: "Our flagship men's tank top. Ultra-lightweight DryFlex fabric wicks moisture instantly. Athletic cut with dropped armholes for maximum mobility.", features: ["DryFlex moisture-wicking fabric", "Dropped armhole cut", "Flatlock seams (anti-chafing)", "Reflective logo", "Machine washable"] },
-    { id: 8, name: "Iron Pump Stringer", price: 29.99, category: "upperwear", gender: "men", image: "🎽", color: "#1a1a1a", sizes: ["S", "M", "L", "XL"], rating: 4.7, reviews: 654, description: "Classic Y-back stringer tank built for serious lifters. Deep cut sides show off your hard work while the slim fit hugs your physique.", features: ["Cotton-poly blend", "Y-back racerback design", "Deep cut sides", "Tapered fit", "Pre-shrunk fabric"] },
-    { id: 9, name: "Tech Training Tee", price: 39.99, category: "upperwear", gender: "men", image: "👕", color: "#111", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.9, reviews: 1021, badge: "bestseller", description: "The ultimate training t-shirt. 4-way stretch fabric moves with you through every exercise. Anti-odor treatment keeps you fresh all session.", features: ["4-way stretch fabric", "Anti-odor treatment", "Raglan sleeves", "Mesh ventilation panels", "Quick-dry technology"] },
-    { id: 10, name: "Phantom Hoodie", price: 69.99, category: "upperwear", gender: "men", image: "🧥", color: "#0d0d0d", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.8, reviews: 445, badge: "new", description: "Heavyweight cotton-blend hoodie with a sleek, tapered fit. Features kangaroo pocket, thumbhole cuffs, and oversized hood for that stealth look.", features: ["320gsm heavyweight cotton", "Tapered athletic fit", "Thumbhole cuffs", "Oversized hood", "Ribbed hem and cuffs"] },
+  // UPPERWEAR - MEN
+  { id: 7, name: "Apex Performance Tank", price: 34.99, category: "upperwear", gender: "men", image: "🎽", color: "#0a0a0a", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.8, reviews: 823, badge: "bestseller", description: "Our flagship men's tank top. Ultra-lightweight DryFlex fabric wicks moisture instantly. Athletic cut with dropped armholes for maximum mobility.", features: ["DryFlex moisture-wicking fabric", "Dropped armhole cut", "Flatlock seams (anti-chafing)", "Reflective logo", "Machine washable"] },
+  { id: 8, name: "Iron Pump Stringer", price: 29.99, category: "upperwear", gender: "men", image: "🎽", color: "#1a1a1a", sizes: ["S", "M", "L", "XL"], rating: 4.7, reviews: 654, description: "Classic Y-back stringer tank built for serious lifters. Deep cut sides show off your hard work while the slim fit hugs your physique.", features: ["Cotton-poly blend", "Y-back racerback design", "Deep cut sides", "Tapered fit", "Pre-shrunk fabric"] },
+  { id: 9, name: "Tech Training Tee", price: 39.99, category: "upperwear", gender: "men", image: "👕", color: "#111", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.9, reviews: 1021, badge: "bestseller", description: "The ultimate training t-shirt. 4-way stretch fabric moves with you through every exercise. Anti-odor treatment keeps you fresh all session.", features: ["4-way stretch fabric", "Anti-odor treatment", "Raglan sleeves", "Mesh ventilation panels", "Quick-dry technology"] },
+  { id: 10, name: "Phantom Hoodie", price: 69.99, category: "upperwear", gender: "men", image: "🧥", color: "#0d0d0d", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.8, reviews: 445, badge: "new", description: "Heavyweight cotton-blend hoodie with a sleek, tapered fit. Features kangaroo pocket, thumbhole cuffs, and oversized hood for that stealth look.", features: ["320gsm heavyweight cotton", "Tapered athletic fit", "Thumbhole cuffs", "Oversized hood", "Ribbed hem and cuffs"] },
 
-    // UPPERWEAR - WOMEN
-    { id: 11, name: "Sculpt Sports Bra", price: 44.99, category: "upperwear", gender: "women", image: "👙", color: "#1a1a1a", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.9, reviews: 1245, badge: "bestseller", description: "High-impact sports bra with seamless construction and adjustable straps. Engineered support for intense training without compromising comfort.", features: ["High-impact support", "Seamless construction", "Adjustable straps", "Moisture-wicking fabric", "Removable pads"] },
-    { id: 12, name: "Power Crop Top", price: 34.99, category: "upperwear", gender: "women", image: "👕", color: "#222", sizes: ["XS", "S", "M", "L"], rating: 4.7, reviews: 678, description: "Cropped training top with built-in shelf bra. Ribbed fabric provides extra stretch and a flattering silhouette during every movement.", features: ["Built-in shelf bra", "Ribbed stretch fabric", "Cropped length", "Flatlock seams", "Four-way stretch"] },
-    { id: 13, name: "Flow Racerback Tank", price: 29.99, category: "upperwear", gender: "women", image: "🎽", color: "#151515", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.8, reviews: 534, description: "Lightweight racerback tank with mesh panel detailing. Loose, flowy fit that looks great paired with leggings or shorts for any workout.", features: ["Lightweight fabric", "Racerback design", "Mesh panel details", "Relaxed fit", "Quick-dry technology"] },
-    { id: 14, name: "Storm Zip Hoodie", price: 74.99, category: "upperwear", gender: "women", image: "🧥", color: "#0f0f0f", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.8, reviews: 389, badge: "new", description: "Full-zip hoodie with a slim, feminine cut. Tech fleece interior keeps you warm during warmups. Hidden zippered pockets for secure storage.", features: ["Tech fleece interior", "Slim feminine cut", "Full-zip front", "Hidden zip pockets", "Thumbhole cuffs"] },
+  // UPPERWEAR - WOMEN
+  { id: 11, name: "Sculpt Sports Bra", price: 44.99, category: "upperwear", gender: "women", image: "👙", color: "#1a1a1a", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.9, reviews: 1245, badge: "bestseller", description: "High-impact sports bra with seamless construction and adjustable straps. Engineered support for intense training without compromising comfort.", features: ["High-impact support", "Seamless construction", "Adjustable straps", "Moisture-wicking fabric", "Removable pads"] },
+  { id: 12, name: "Power Crop Top", price: 34.99, category: "upperwear", gender: "women", image: "👕", color: "#222", sizes: ["XS", "S", "M", "L"], rating: 4.7, reviews: 678, description: "Cropped training top with built-in shelf bra. Ribbed fabric provides extra stretch and a flattering silhouette during every movement.", features: ["Built-in shelf bra", "Ribbed stretch fabric", "Cropped length", "Flatlock seams", "Four-way stretch"] },
+  { id: 13, name: "Flow Racerback Tank", price: 29.99, category: "upperwear", gender: "women", image: "🎽", color: "#151515", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.8, reviews: 534, description: "Lightweight racerback tank with mesh panel detailing. Loose, flowy fit that looks great paired with leggings or shorts for any workout.", features: ["Lightweight fabric", "Racerback design", "Mesh panel details", "Relaxed fit", "Quick-dry technology"] },
+  { id: 14, name: "Storm Zip Hoodie", price: 74.99, category: "upperwear", gender: "women", image: "🧥", color: "#0f0f0f", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.8, reviews: 389, badge: "new", description: "Full-zip hoodie with a slim, feminine cut. Tech fleece interior keeps you warm during warmups. Hidden zippered pockets for secure storage.", features: ["Tech fleece interior", "Slim feminine cut", "Full-zip front", "Hidden zip pockets", "Thumbhole cuffs"] },
 
-    // LOWERWEAR - MEN
-    { id: 15, name: "Titan Training Shorts", price: 39.99, category: "lowerwear", gender: "men", image: "🩳", color: "#111", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.8, reviews: 901, badge: "bestseller", description: "7-inch inseam training shorts with built-in compression liner. Zippered pockets and 4-way stretch for unrestricted movement during squats and lunges.", features: ["Built-in compression liner", "7\" inseam", "Zippered side pockets", "4-way stretch", "Anti-ride-up design"] },
-    { id: 16, name: "Stealth Joggers", price: 59.99, category: "lowerwear", gender: "men", image: "👖", color: "#0e0e0e", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.9, reviews: 756, badge: "bestseller", description: "Tapered slim-fit joggers in technical cotton blend. Zippered ankle cuffs, elastic waistband with drawcord, and deep zippered pockets.", features: ["Technical cotton blend", "Tapered slim fit", "Zippered ankle cuffs", "Elastic waistband", "Deep zippered pockets"] },
-    { id: 17, name: "Compression Tights", price: 49.99, category: "lowerwear", gender: "men", image: "🦵", color: "#0a0a0a", sizes: ["S", "M", "L", "XL"], rating: 4.6, reviews: 421, description: "Full-length compression tights providing muscle support and improved blood flow. Flatlock seams prevent chafing during long sessions.", features: ["Graduated compression", "Flatlock seams", "Moisture-wicking", "UPF 30 sun protection", "Reflective details"] },
+  // LOWERWEAR - MEN
+  { id: 15, name: "Titan Training Shorts", price: 39.99, category: "lowerwear", gender: "men", image: "🩳", color: "#111", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.8, reviews: 901, badge: "bestseller", description: "7-inch inseam training shorts with built-in compression liner. Zippered pockets and 4-way stretch for unrestricted movement during squats and lunges.", features: ["Built-in compression liner", "7\" inseam", "Zippered side pockets", "4-way stretch", "Anti-ride-up design"] },
+  { id: 16, name: "Stealth Joggers", price: 59.99, category: "lowerwear", gender: "men", image: "👖", color: "#0e0e0e", sizes: ["S", "M", "L", "XL", "XXL"], rating: 4.9, reviews: 756, badge: "bestseller", description: "Tapered slim-fit joggers in technical cotton blend. Zippered ankle cuffs, elastic waistband with drawcord, and deep zippered pockets.", features: ["Technical cotton blend", "Tapered slim fit", "Zippered ankle cuffs", "Elastic waistband", "Deep zippered pockets"] },
+  { id: 17, name: "Compression Tights", price: 49.99, category: "lowerwear", gender: "men", image: "🦵", color: "#0a0a0a", sizes: ["S", "M", "L", "XL"], rating: 4.6, reviews: 421, description: "Full-length compression tights providing muscle support and improved blood flow. Flatlock seams prevent chafing during long sessions.", features: ["Graduated compression", "Flatlock seams", "Moisture-wicking", "UPF 30 sun protection", "Reflective details"] },
 
-    // LOWERWEAR - WOMEN
-    { id: 18, name: "Sculpt High-Rise Leggings", price: 64.99, category: "lowerwear", gender: "women", image: "🦵", color: "#111", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.9, reviews: 2134, badge: "bestseller", description: "Our #1 selling legging. Buttery-soft fabric with squat-proof coverage and a high-rise waistband that stays put. Side pocket fits your phone.", features: ["Squat-proof fabric", "High-rise waistband", "Side phone pocket", "Buttery-soft feel", "4-way stretch"] },
-    { id: 19, name: "Flex Training Shorts", price: 34.99, category: "lowerwear", gender: "women", image: "🩳", color: "#1a1a1a", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.7, reviews: 567, description: "High-waisted training shorts with built-in brief liner. 5-inch inseam provides coverage while allowing full range of motion for lunges and jumps.", features: ["Built-in brief liner", "High-waisted fit", "5\" inseam", "Lightweight fabric", "Drawcord waistband"] },
-    { id: 20, name: "Luxe Flare Pants", price: 69.99, category: "lowerwear", gender: "women", image: "👖", color: "#0d0d0d", sizes: ["XS", "S", "M", "L"], rating: 4.8, reviews: 345, badge: "new", description: "High-rise flare yoga pants that transition from studio to street. Crossover waistband and ultra-soft modal fabric for all-day comfort.", features: ["Crossover waistband", "Flare leg opening", "Modal fabric blend", "High-rise fit", "Side pockets"] },
+  // LOWERWEAR - WOMEN
+  { id: 18, name: "Sculpt High-Rise Leggings", price: 64.99, category: "lowerwear", gender: "women", image: "🦵", color: "#111", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.9, reviews: 2134, badge: "bestseller", description: "Our #1 selling legging. Buttery-soft fabric with squat-proof coverage and a high-rise waistband that stays put. Side pocket fits your phone.", features: ["Squat-proof fabric", "High-rise waistband", "Side phone pocket", "Buttery-soft feel", "4-way stretch"] },
+  { id: 19, name: "Flex Training Shorts", price: 34.99, category: "lowerwear", gender: "women", image: "🩳", color: "#1a1a1a", sizes: ["XS", "S", "M", "L", "XL"], rating: 4.7, reviews: 567, description: "High-waisted training shorts with built-in brief liner. 5-inch inseam provides coverage while allowing full range of motion for lunges and jumps.", features: ["Built-in brief liner", "High-waisted fit", "5\" inseam", "Lightweight fabric", "Drawcord waistband"] },
+  { id: 20, name: "Luxe Flare Pants", price: 69.99, category: "lowerwear", gender: "women", image: "👖", color: "#0d0d0d", sizes: ["XS", "S", "M", "L"], rating: 4.8, reviews: 345, badge: "new", description: "High-rise flare yoga pants that transition from studio to street. Crossover waistband and ultra-soft modal fabric for all-day comfort.", features: ["Crossover waistband", "Flare leg opening", "Modal fabric blend", "High-rise fit", "Side pockets"] },
 
-    // FOOTWEAR
-    { id: 21, name: "Apex Trainer Pro", price: 129.99, category: "footwear", gender: "men", image: "👟", color: "#0a0a0a", sizes: ["8", "9", "10", "11", "12", "13"], rating: 4.8, reviews: 678, badge: "bestseller", description: "Versatile cross-training shoe with flat, stable sole for lifting and responsive cushioning for cardio. Rope-guard sidewall protects during rope climbs.", features: ["Flat stable heel for lifting", "Responsive forefoot cushion", "Rope-guard sidewall", "Breathable mesh upper", "Rubber outsole grip"] },
-    { id: 22, name: "Lift Max Powerlifting Shoe", price: 149.99, category: "footwear", gender: "unisex", image: "👞", color: "#111", sizes: ["6", "7", "8", "9", "10", "11", "12", "13"], rating: 4.9, reviews: 432, description: "Competition-grade powerlifting shoe with raised heel and metatarsal strap. Rigid sole provides a rock-solid base for heavy squats and Olympic lifts.", features: ["Raised heel (0.75\")", "Metatarsal strap", "Rigid non-compressible sole", "Leather upper", "Anti-slip rubber outsole"] },
-    { id: 23, name: "Swift Run Trainer", price: 119.99, category: "footwear", gender: "women", image: "👟", color: "#1a1a1a", sizes: ["5", "6", "7", "8", "9", "10"], rating: 4.7, reviews: 523, badge: "new", description: "Lightweight trainer designed for HIIT and cardio-focused sessions. Responsive foam midsole and breathable knit upper for maximum agility.", features: ["Responsive foam midsole", "Breathable knit upper", "Lightweight (7.5oz)", "Flexible outsole", "Padded collar"] },
-    { id: 24, name: "Elite Performance Socks (3-Pack)", price: 24.99, category: "footwear", gender: "unisex", image: "🧦", color: "#222", sizes: ["S (6-8)", "M (8-10)", "L (10-13)"], rating: 4.8, reviews: 890, badge: "bestseller", description: "Cushioned crew-length performance socks with arch compression and moisture-wicking yarns. Reinforced heel and toe for durability. 3-pack.", features: ["Cushioned sole", "Arch compression", "Moisture-wicking", "Reinforced heel & toe", "3-pack value"] },
+  // FOOTWEAR
+  { id: 21, name: "Apex Trainer Pro", price: 129.99, category: "footwear", gender: "men", image: "👟", color: "#0a0a0a", sizes: ["8", "9", "10", "11", "12", "13"], rating: 4.8, reviews: 678, badge: "bestseller", description: "Versatile cross-training shoe with flat, stable sole for lifting and responsive cushioning for cardio. Rope-guard sidewall protects during rope climbs.", features: ["Flat stable heel for lifting", "Responsive forefoot cushion", "Rope-guard sidewall", "Breathable mesh upper", "Rubber outsole grip"] },
+  { id: 22, name: "Lift Max Powerlifting Shoe", price: 149.99, category: "footwear", gender: "unisex", image: "👞", color: "#111", sizes: ["6", "7", "8", "9", "10", "11", "12", "13"], rating: 4.9, reviews: 432, description: "Competition-grade powerlifting shoe with raised heel and metatarsal strap. Rigid sole provides a rock-solid base for heavy squats and Olympic lifts.", features: ["Raised heel (0.75\")", "Metatarsal strap", "Rigid non-compressible sole", "Leather upper", "Anti-slip rubber outsole"] },
+  { id: 23, name: "Swift Run Trainer", price: 119.99, category: "footwear", gender: "women", image: "👟", color: "#1a1a1a", sizes: ["5", "6", "7", "8", "9", "10"], rating: 4.7, reviews: 523, badge: "new", description: "Lightweight trainer designed for HIIT and cardio-focused sessions. Responsive foam midsole and breathable knit upper for maximum agility.", features: ["Responsive foam midsole", "Breathable knit upper", "Lightweight (7.5oz)", "Flexible outsole", "Padded collar"] },
+  { id: 24, name: "Elite Performance Socks (3-Pack)", price: 24.99, category: "footwear", gender: "unisex", image: "🧦", color: "#222", sizes: ["S (6-8)", "M (8-10)", "L (10-13)"], rating: 4.8, reviews: 890, badge: "bestseller", description: "Cushioned crew-length performance socks with arch compression and moisture-wicking yarns. Reinforced heel and toe for durability. 3-pack.", features: ["Cushioned sole", "Arch compression", "Moisture-wicking", "Reinforced heel & toe", "3-pack value"] },
 
-    // ACCESSORIES
-    { id: 25, name: "Tactical Gym Bag", price: 79.99, category: "accessories", gender: "unisex", image: "🎒", color: "#0e0e0e", sizes: ["One Size"], rating: 4.8, reviews: 567, badge: "bestseller", description: "45L duffel bag with separate shoe compartment, wet pocket, and laptop sleeve. Water-resistant 1000D nylon construction built to last.", features: ["45L capacity", "Shoe compartment", "Wet/dry pocket", "Laptop sleeve (15\")", "Water-resistant 1000D nylon"] },
-    { id: 26, name: "Lifting Belt", price: 59.99, category: "accessories", gender: "unisex", image: "🏋️", color: "#1a1a1a", sizes: ["S", "M", "L", "XL"], rating: 4.9, reviews: 789, description: "10mm genuine leather powerlifting belt with single-prong buckle. Provides core support for heavy compound lifts. IPF approved.", features: ["10mm genuine leather", "Single-prong buckle", "4\" width throughout", "IPF approved", "Break-in period included"] },
-    { id: 27, name: "Steel Shaker Bottle", price: 19.99, category: "accessories", gender: "unisex", image: "🥤", color: "#111", sizes: ["24oz"], rating: 4.7, reviews: 1234, description: "Double-wall insulated stainless steel shaker with leak-proof lid and mesh blender. Keeps drinks cold for 24 hours. BPA-free.", features: ["Double-wall insulation", "Stainless steel", "Leak-proof lid", "Mesh blender ball", "24oz / 710ml capacity"] },
-    { id: 28, name: "Resistance Band Set", price: 34.99, category: "accessories", gender: "unisex", image: "🔄", color: "#222", sizes: ["Set of 5"], rating: 4.8, reviews: 645, badge: "new", description: "Set of 5 latex resistance bands ranging from 5–80 lbs. Includes door anchor, ankle straps, and carry bag. Perfect for warmups and rehab.", features: ["5 resistance levels (5-80 lbs)", "Natural latex rubber", "Door anchor included", "Ankle straps included", "Carry bag included"] },
+  // ACCESSORIES
+  { id: 25, name: "Tactical Gym Bag", price: 79.99, category: "accessories", gender: "unisex", image: "🎒", color: "#0e0e0e", sizes: ["One Size"], rating: 4.8, reviews: 567, badge: "bestseller", description: "45L duffel bag with separate shoe compartment, wet pocket, and laptop sleeve. Water-resistant 1000D nylon construction built to last.", features: ["45L capacity", "Shoe compartment", "Wet/dry pocket", "Laptop sleeve (15\")", "Water-resistant 1000D nylon"] },
+  { id: 26, name: "Lifting Belt", price: 59.99, category: "accessories", gender: "unisex", image: "🏋️", color: "#1a1a1a", sizes: ["S", "M", "L", "XL"], rating: 4.9, reviews: 789, description: "10mm genuine leather powerlifting belt with single-prong buckle. Provides core support for heavy compound lifts. IPF approved.", features: ["10mm genuine leather", "Single-prong buckle", "4\" width throughout", "IPF approved", "Break-in period included"] },
+  { id: 27, name: "Steel Shaker Bottle", price: 19.99, category: "accessories", gender: "unisex", image: "🥤", color: "#111", sizes: ["24oz"], rating: 4.7, reviews: 1234, description: "Double-wall insulated stainless steel shaker with leak-proof lid and mesh blender. Keeps drinks cold for 24 hours. BPA-free.", features: ["Double-wall insulation", "Stainless steel", "Leak-proof lid", "Mesh blender ball", "24oz / 710ml capacity"] },
+  { id: 28, name: "Resistance Band Set", price: 34.99, category: "accessories", gender: "unisex", image: "🔄", color: "#222", sizes: ["Set of 5"], rating: 4.8, reviews: 645, badge: "new", description: "Set of 5 latex resistance bands ranging from 5–80 lbs. Includes door anchor, ankle straps, and carry bag. Perfect for warmups and rehab.", features: ["5 resistance levels (5-80 lbs)", "Natural latex rubber", "Door anchor included", "Ankle straps included", "Carry bag included"] },
+
+  // NUTRITION
+  { id: 29, name: "Creatine Monohydrate", price: 34.99, category: "nutrition", gender: "unisex", image: "⚡", color: "#1a0a2e", sizes: ["250g", "500g", "1kg"], rating: 4.9, reviews: 2456, badge: "bestseller", description: "Pharmaceutical-grade micronized creatine monohydrate for explosive strength, power, and lean muscle gains. 5g per serving delivers proven results backed by over 700 studies.", features: ["100% pure micronized creatine monohydrate", "5g per serving — clinically dosed", "Unflavored — mixes with any drink", "Third-party lab tested for purity", "No fillers, no additives, no BS"] },
+  { id: 30, name: "Whey Protein Isolate", price: 54.99, category: "nutrition", gender: "unisex", image: "🥤", color: "#0d1b2a", sizes: ["Chocolate", "Vanilla", "Strawberry", "Cookies & Cream"], rating: 4.8, reviews: 3102, badge: "bestseller", description: "Ultra-pure whey protein isolate with 27g protein per scoop, less than 1g sugar, and zero bloating. Cold-processed micro-filtration preserves muscle-building amino acids.", features: ["27g protein per scoop", "Less than 1g sugar", "Cold micro-filtered", "Fast-absorbing for post-workout", "Available in 4 premium flavors"] },
+  { id: 31, name: "Pre-Workout Ignite", price: 44.99, category: "nutrition", gender: "unisex", image: "🔥", color: "#2d0a0a", sizes: ["Blue Raspberry", "Fruit Punch", "Watermelon", "Mango"], rating: 4.7, reviews: 1834, badge: "new", description: "High-stim pre-workout formula with 300mg caffeine, 6g citrulline malate, and 3.2g beta-alanine. Get laser focus, insane pumps, and relentless energy for your most intense sessions.", features: ["300mg caffeine per serving", "6g citrulline malate for pumps", "3.2g beta-alanine for endurance", "Nootropics for laser focus", "No crash formula"] },
+  { id: 32, name: "BCAA Recovery Complex", price: 29.99, category: "nutrition", gender: "unisex", image: "💧", color: "#0a1a2d", sizes: ["Tropical Punch", "Lemon Lime", "Grape", "Unflavored"], rating: 4.6, reviews: 987, description: "2:1:1 ratio BCAA formula with added electrolytes and glutamine for max recovery. Sip intra-workout to reduce muscle breakdown, fight fatigue, and stay hydrated.", features: ["7g BCAAs per serving (2:1:1 ratio)", "Added electrolytes for hydration", "2.5g L-Glutamine", "Zero sugar, zero calories", "Mixes instantly — no clumping"] },
+  { id: 33, name: "Mass Gainer Pro", price: 64.99, category: "nutrition", gender: "unisex", image: "💪", color: "#1a1a0a", sizes: ["Chocolate Fudge", "Vanilla Milkshake", "Peanut Butter"], rating: 4.5, reviews: 756, description: "High-calorie mass gainer with 1,250 calories, 50g protein, and 250g carbs per serving. Packed with complex carbs, healthy fats, and premium whey for serious size and strength gains.", features: ["1,250 calories per serving", "50g premium whey protein blend", "250g complex carbohydrates", "Added creatine & BCAAs", "Great taste, easy to mix"] },
+  { id: 34, name: "Protein Bar Box (12-Pack)", price: 39.99, category: "nutrition", gender: "unisex", image: "🍫", color: "#1c0f06", sizes: ["Chocolate Brownie", "Cookie Dough", "Peanut Butter Crunch", "Birthday Cake"], rating: 4.8, reviews: 1567, badge: "new", description: "20g protein, 2g sugar, and absolutely delicious. These guilt-free protein bars taste like dessert but fuel like a meal. Perfect for on-the-go athletes and meal preppers.", features: ["20g whey & casein protein blend", "Only 2g sugar per bar", "Soft-baked, chewy texture", "Gluten-free certified", "12 bars per box"] },
 ];
 
 // ===== BLOG DATA =====
 const BLOG_POSTS = [
-    {
-        id: 1,
-        title: "The Complete Guide to Pre-Workout Nutrition",
-        category: "nutrition",
-        date: "Feb 20, 2026",
-        readTime: "8 min read",
-        image: "🥗",
-        excerpt: "What you eat before training can make or break your performance. Learn the science behind optimal pre-workout nutrition and meal timing.",
-        content: `
+  {
+    id: 1,
+    title: "The Complete Guide to Pre-Workout Nutrition",
+    category: "nutrition",
+    date: "Feb 20, 2026",
+    readTime: "8 min read",
+    image: "🥗",
+    excerpt: "What you eat before training can make or break your performance. Learn the science behind optimal pre-workout nutrition and meal timing.",
+    content: `
       <p>What you eat before your workout can significantly impact your performance, energy levels, and recovery. Understanding pre-workout nutrition is essential for anyone serious about their fitness goals.</p>
       
       <h2>Why Pre-Workout Nutrition Matters</h2>
@@ -98,16 +106,16 @@ const BLOG_POSTS = [
       <h2>Key Takeaways</h2>
       <p>Pre-workout nutrition doesn't need to be complicated. Focus on a balanced meal with carbs and protein, time it appropriately, and listen to your body. Experiment with different foods and timing to find what works best for your training style and goals.</p>
     `
-    },
-    {
-        id: 2,
-        title: "5 Best Compound Exercises for Full-Body Strength",
-        category: "exercises",
-        date: "Feb 15, 2026",
-        readTime: "6 min read",
-        image: "🏋️",
-        excerpt: "Build maximum muscle and strength with these 5 essential compound movements. Learn proper form, programming tips, and common mistakes to avoid.",
-        content: `
+  },
+  {
+    id: 2,
+    title: "5 Best Compound Exercises for Full-Body Strength",
+    category: "exercises",
+    date: "Feb 15, 2026",
+    readTime: "6 min read",
+    image: "🏋️",
+    excerpt: "Build maximum muscle and strength with these 5 essential compound movements. Learn proper form, programming tips, and common mistakes to avoid.",
+    content: `
       <p>Compound exercises recruit multiple muscle groups simultaneously, making them the most efficient way to build strength and muscle mass. Here are the 5 essential compound movements every athlete should master.</p>
       
       <h2>1. Barbell Back Squat</h2>
@@ -156,16 +164,16 @@ const BLOG_POSTS = [
       For muscle growth: 3–4 sets × 8–12 reps at 65–80% of your 1RM<br>
       For endurance: 2–3 sets × 15–20 reps at 50–65% of your 1RM</p>
     `
-    },
-    {
-        id: 3,
-        title: "Post-Workout Recovery: What to Eat After Training",
-        category: "nutrition",
-        date: "Feb 10, 2026",
-        readTime: "7 min read",
-        image: "🍗",
-        excerpt: "Your post-workout meal is the most important meal of the day. Learn what, when, and how much to eat for optimal recovery and muscle growth.",
-        content: `
+  },
+  {
+    id: 3,
+    title: "Post-Workout Recovery: What to Eat After Training",
+    category: "nutrition",
+    date: "Feb 10, 2026",
+    readTime: "7 min read",
+    image: "🍗",
+    excerpt: "Your post-workout meal is the most important meal of the day. Learn what, when, and how much to eat for optimal recovery and muscle growth.",
+    content: `
       <p>What you consume after training directly impacts your recovery, muscle growth, and how you'll perform in your next session. The post-workout window is a critical opportunity to refuel and rebuild.</p>
       
       <h2>The Anabolic Window — Myth or Reality?</h2>
@@ -197,16 +205,16 @@ const BLOG_POSTS = [
         <li><strong>Tart Cherry Juice:</strong> Natural anti-inflammatory that may reduce DOMS</li>
       </ul>
     `
-    },
-    {
-        id: 4,
-        title: "Building the Perfect Push-Pull-Legs Routine",
-        category: "exercises",
-        date: "Feb 5, 2026",
-        readTime: "10 min read",
-        image: "💪",
-        excerpt: "The push-pull-legs split is one of the most popular and effective training programs. Here's how to design your own PPL routine for maximum gains.",
-        content: `
+  },
+  {
+    id: 4,
+    title: "Building the Perfect Push-Pull-Legs Routine",
+    category: "exercises",
+    date: "Feb 5, 2026",
+    readTime: "10 min read",
+    image: "💪",
+    excerpt: "The push-pull-legs split is one of the most popular and effective training programs. Here's how to design your own PPL routine for maximum gains.",
+    content: `
       <p>The Push-Pull-Legs (PPL) split divides your training into three categories based on movement patterns. It's one of the most logical and effective ways to structure your workouts.</p>
       
       <h2>How PPL Works</h2>
@@ -254,16 +262,16 @@ const BLOG_POSTS = [
       <strong>Intermediate:</strong> PPL × 2 per week (6 training days)<br>
       <strong>Advanced:</strong> PPL × 2 with a dedicated arm/weak point day</p>
     `
-    },
-    {
-        id: 5,
-        title: "Understanding Macros: A Complete Guide to IIFYM",
-        category: "nutrition",
-        date: "Jan 30, 2026",
-        readTime: "9 min read",
-        image: "📊",
-        excerpt: "If It Fits Your Macros (IIFYM) is a flexible dieting approach. Learn how to calculate your macros and build a sustainable nutrition plan.",
-        content: `
+  },
+  {
+    id: 5,
+    title: "Understanding Macros: A Complete Guide to IIFYM",
+    category: "nutrition",
+    date: "Jan 30, 2026",
+    readTime: "9 min read",
+    image: "📊",
+    excerpt: "If It Fits Your Macros (IIFYM) is a flexible dieting approach. Learn how to calculate your macros and build a sustainable nutrition plan.",
+    content: `
       <p>IIFYM (If It Fits Your Macros) is a flexible dieting approach that focuses on hitting specific macronutrient targets rather than restricting specific foods. It's sustainable, effective, and backed by science.</p>
       
       <h2>Step 1: Calculate Your TDEE</h2>
@@ -292,16 +300,16 @@ const BLOG_POSTS = [
         <li>Don't stress about one bad day — consistency over time is what matters</li>
       </ol>
     `
-    },
-    {
-        id: 6,
-        title: "The Ultimate Guide to Progressive Overload",
-        category: "exercises",
-        date: "Jan 25, 2026",
-        readTime: "7 min read",
-        image: "📈",
-        excerpt: "Progressive overload is the single most important principle for building muscle and strength. Here's how to apply it to your training.",
-        content: `
+  },
+  {
+    id: 6,
+    title: "The Ultimate Guide to Progressive Overload",
+    category: "exercises",
+    date: "Jan 25, 2026",
+    readTime: "7 min read",
+    image: "📈",
+    excerpt: "Progressive overload is the single most important principle for building muscle and strength. Here's how to apply it to your training.",
+    content: `
       <p>Progressive overload is the gradual increase of stress placed on the body during training. Without it, your body has no reason to adapt, grow, or get stronger. It is the #1 principle of muscle growth.</p>
       
       <h2>What is Progressive Overload?</h2>
@@ -333,16 +341,16 @@ const BLOG_POSTS = [
         <li>Ignoring recovery (your muscles grow OUTSIDE the gym)</li>
       </ul>
     `
-    },
-    {
-        id: 7,
-        title: "Meal Prep 101: Fuel Your Week Like a Pro",
-        category: "nutrition",
-        date: "Jan 20, 2026",
-        readTime: "8 min read",
-        image: "🍱",
-        excerpt: "Learn how to meal prep efficiently, save time and money, and stay on track with your nutrition goals throughout the busy week.",
-        content: `
+  },
+  {
+    id: 7,
+    title: "Meal Prep 101: Fuel Your Week Like a Pro",
+    category: "nutrition",
+    date: "Jan 20, 2026",
+    readTime: "8 min read",
+    image: "🍱",
+    excerpt: "Learn how to meal prep efficiently, save time and money, and stay on track with your nutrition goals throughout the busy week.",
+    content: `
       <p>Meal prep is the secret weapon of every successful fitness enthusiast. By preparing your meals in advance, you eliminate the guesswork and temptation that derail most nutrition plans.</p>
       
       <h2>Benefits of Meal Prepping</h2>
@@ -381,16 +389,16 @@ const BLOG_POSTS = [
         <li>Invest in quality containers — glass lasts longer and heats more evenly</li>
       </ul>
     `
-    },
-    {
-        id: 8,
-        title: "Mobility Work: The Missing Piece of Your Training",
-        category: "lifestyle",
-        date: "Jan 15, 2026",
-        readTime: "6 min read",
-        image: "🧘",
-        excerpt: "Neglecting mobility work is the fastest path to injury and plateaus. Learn essential stretches and routines to keep your body moving freely.",
-        content: `
+  },
+  {
+    id: 8,
+    title: "Mobility Work: The Missing Piece of Your Training",
+    category: "lifestyle",
+    date: "Jan 15, 2026",
+    readTime: "6 min read",
+    image: "🧘",
+    excerpt: "Neglecting mobility work is the fastest path to injury and plateaus. Learn essential stretches and routines to keep your body moving freely.",
+    content: `
       <p>Mobility is the foundation that everything else in your fitness journey is built upon. Without adequate mobility, you can't perform exercises safely or effectively, and you're leaving gains on the table.</p>
       
       <h2>Mobility vs Flexibility</h2>
@@ -416,5 +424,5 @@ const BLOG_POSTS = [
       <h2>Recommended Routine</h2>
       <p>Spend 10–15 minutes daily on mobility. Focus on your problem areas — for most lifters, this is hips, thoracic spine, and ankles. Consistency with mobility work will dramatically improve your training performance and reduce injury risk.</p>
     `
-    }
+  }
 ];
