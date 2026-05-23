@@ -8,6 +8,7 @@
     "dev": "npx serve . -l 3000"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "serve": "^14.2.0"
   }
 }
