@@ -15,6 +15,17 @@
 </head>
 
 <body>
+  <!-- SESSION CHROME: the bar loads as you scroll, the rail counts the sets -->
+  <div class="load-bar" aria-hidden="true">
+    <div class="load-bar-fill"></div>
+  </div>
+  <aside class="rep-hud" id="rep-hud" aria-hidden="true">
+    <span class="hud-label">SET</span>
+    <span class="hud-count"><span id="hud-rep">00</span><span class="hud-total" id="hud-total">/06</span></span>
+    <span class="hud-track" id="hud-track"></span>
+    <span class="hud-lift" id="hud-lift">RACKED</span>
+  </aside>
+
   <!-- NAVIGATION -->
   <nav id="main-nav">
     <div class="nav-container">
@@ -47,7 +58,7 @@
   <!-- ===== HOME PAGE ===== -->
   <main id="page-home" class="page active">
     <!-- HERO -->
-    <section class="hero" id="hero-section">
+    <section class="hero" id="hero-section" data-set="WARM-UP">
       <div class="hero-bg-overlay"></div>
       <div class="hero-particles" id="hero-particles"></div>
       <div class="hero-content">
@@ -72,8 +83,33 @@
     </section>
 
     <!-- CATEGORIES -->
-    <section class="section categories-section" id="categories-section">
+    <section class="section categories-section" id="categories-section" data-set="DEADLIFT">
+      <!-- THE RIG — shaft bows, plates break the floor, the section rides it up -->
+      <div class="deadlift-rig" id="deadlift-rig" aria-hidden="true">
+        <svg class="rig-bar" viewBox="0 0 1200 260" role="presentation">
+          <!-- One assembly: shaft, plates and readout all travel together -->
+          <g id="bar-assembly">
+            <path class="bar-shaft" id="bar-shaft" d="M 150 80 Q 600 80 1050 80" />
+            <path class="bar-knurl" id="bar-knurl" d="M 430 80 Q 600 80 770 80" />
+            <g class="plate-group">
+              <rect class="rig-plate" x="86" y="16" width="19" height="128" rx="5" />
+              <rect class="rig-plate" x="110" y="28" width="15" height="104" rx="5" />
+              <rect class="rig-plate-inner" x="90" y="22" width="11" height="116" rx="4" />
+              <rect class="rig-collar" x="130" y="68" width="14" height="24" rx="3" />
+            </g>
+            <g class="plate-group">
+              <rect class="rig-plate" x="1095" y="16" width="19" height="128" rx="5" />
+              <rect class="rig-plate" x="1075" y="28" width="15" height="104" rx="5" />
+              <rect class="rig-plate-inner" x="1099" y="22" width="11" height="116" rx="4" />
+              <rect class="rig-collar" x="1056" y="68" width="14" height="24" rx="3" />
+            </g>
+            <text class="rig-weight" id="rig-weight" x="600" y="36" text-anchor="middle">0 KG</text>
+            <text class="rig-stamp" id="rig-stamp" x="600" y="130" text-anchor="middle">LOCKOUT</text>
+          </g>
+        </svg>
+      </div>
       <div class="container">
+        <span class="set-label">SET 02 &middot; OFF THE FLOOR</span>
         <h2 class="section-title">SHOP BY CATEGORY</h2>
         <p class="section-subtitle">Find the perfect gear for every muscle group</p>
         <div class="categories-grid">
@@ -117,11 +153,12 @@
     </section>
 
     <!-- FEATURED PRODUCTS -->
-    <section class="section featured-section" id="featured-section">
+    <section class="section featured-section" id="featured-section" data-set="BARBELL CURL">
       <div class="container">
+        <span class="set-label">SET 03 &middot; THROUGH THE GROOVE</span>
         <h2 class="section-title">BEST SELLERS</h2>
         <p class="section-subtitle">Our most loved gear by athletes worldwide</p>
-        <div class="products-grid" id="featured-products"></div>
+        <div class="products-grid" id="featured-products" data-lift-group="curl"></div>
         <div class="section-cta">
           <a href="#" data-page="shop" class="btn btn-primary">VIEW ALL PRODUCTS</a>
         </div>
@@ -129,8 +166,9 @@
     </section>
 
     <!-- GENDER SPLIT -->
-    <section class="section gender-section">
-      <div class="gender-split">
+    <section class="section gender-section" data-set="CABLE CROSSOVER">
+      <span class="set-label">SET 04 &middot; BOTH SIDES</span>
+      <div class="gender-split" data-lift-group="crossover">
         <a href="#" class="gender-card" data-page="shop" data-gender="men">
           <div class="gender-overlay"></div>
           <div class="gender-content">
@@ -151,10 +189,11 @@
     </section>
 
     <!-- WHY US -->
-    <section class="section why-section">
+    <section class="section why-section" data-set="BOX JUMPS">
       <div class="container">
+        <span class="set-label">SET 05 &middot; EXPLOSIVE</span>
         <h2 class="section-title">WHY FITFLEX?</h2>
-        <div class="why-grid">
+        <div class="why-grid" data-lift-group="plyo">
           <div class="why-card">
             <div class="why-icon">🔬</div>
             <h3>Performance Fabric</h3>
@@ -180,10 +219,11 @@
     </section>
 
     <!-- NEWSLETTER -->
-    <section class="section newsletter-section">
+    <section class="section newsletter-section" data-set="BENCH PRESS">
       <div class="container">
-        <div class="newsletter-card">
-          <h2>JOIN THE Fitflex ARMY</h2>
+        <div class="newsletter-card" data-lift="bench">
+          <span class="set-label">SET 06 &middot; FINISHER</span>
+          <h2>JOIN THE FITFLEX ARMY</h2>
           <p>Get 15% off your first order + exclusive drops, training tips & nutrition guides.</p>
           <form class="newsletter-form" id="newsletter-form">
             <input type="email" placeholder="Enter your email" required>
@@ -237,7 +277,7 @@
           <span id="product-count">0 products</span>
           <button class="filter-toggle-btn" id="filter-toggle-btn">Filters</button>
         </div>
-        <div class="products-grid" id="shop-products"></div>
+        <div class="products-grid" id="shop-products" data-lift-group="row"></div>
       </div>
     </section>
   </main>
@@ -334,7 +374,7 @@
         <button class="blog-filter" data-blog-cat="exercises">💪 Exercises</button>
         <button class="blog-filter" data-blog-cat="lifestyle">🧘 Lifestyle</button>
       </div>
-      <div class="blog-grid" id="blog-grid"></div>
+      <div class="blog-grid" id="blog-grid" data-lift-group="row"></div>
     </section>
   </main>
 
@@ -406,6 +446,7 @@
 
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script src="lifts.js"></script>
 
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>

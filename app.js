@@ -98,6 +98,11 @@ function navigateTo(page, id, pushState = true) {
   const targetPage = document.getElementById(`page-${page}`);
   if (targetPage) {
     targetPage.classList.add('active');
+    // Re-rack the bar: every lift on the incoming page starts from the floor.
+    if (window.Lifts) {
+      Lifts.scan();
+      Lifts.reset(targetPage);
+    }
   }
 
   // Update URL hash
@@ -150,6 +155,8 @@ function initScrollAnimations() {
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.section-title, .section-subtitle, .category-card, .why-card, .product-card, .blog-card').forEach(el => {
+    // Anything the lift engine drives runs its own reveal.
+    if (el.hasAttribute('data-lift') || el.closest('[data-lift-group]')) return;
     el.classList.add('fade-in');
     observer.observe(el);
   });
@@ -209,6 +216,7 @@ function renderShopProducts() {
     : '<div class="no-results"><p>No products found matching your filters.</p></div>';
 
   document.getElementById('product-count').textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+  if (window.Lifts) Lifts.scan();
 }
 
 // ===== FILTERS =====
@@ -539,6 +547,7 @@ function renderBlogPosts(filterCat = 'all') {
       renderBlogPosts(btn.dataset.blogCat);
     });
   });
+  if (window.Lifts) Lifts.scan();
 }
 
 function renderBlogPostDetail() {
