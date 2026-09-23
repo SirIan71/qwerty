@@ -10,9 +10,11 @@ const state = {
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
+  initImageFallback();
   initNavigation();
   initHeroParticles();
   renderFeaturedProducts();
+  renderCategoryImages();
   renderShopProducts();
   renderBlogPosts();
   updateCartCount();
@@ -21,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNewsletter();
   initCheckout();
   initFilters();
+  initBlogFilters();
   initCursorEffects();
   initThemeToggle();
 
@@ -98,6 +101,7 @@ function navigateTo(page, id, pushState = true) {
   const targetPage = document.getElementById(`page-${page}`);
   if (targetPage) {
     targetPage.classList.add('active');
+    resetCursorEffects();
     // Re-rack the bar: every lift on the incoming page starts from the floor.
     if (window.Lifts) {
       Lifts.scan();
@@ -117,6 +121,23 @@ function navigateTo(page, id, pushState = true) {
   // Close mobile menu
   document.getElementById('nav-links').classList.remove('open');
   document.getElementById('mobile-menu-btn').classList.remove('open');
+}
+
+// A photo that fails to load hides itself, revealing the emoji placeholder
+// still sitting behind it. Registered in the capture phase because `load` and
+// `error` do not bubble.
+function initImageFallback() {
+  document.addEventListener('error', (e) => {
+    const img = e.target;
+    if (img.tagName !== 'IMG') return;
+    if (img.classList.contains('product-photo')) {
+      img.classList.add('failed');
+    } else if (img.classList.contains('category-photo')) {
+      const card = img.closest('.category-card');
+      if (card) card.classList.remove('has-photo');
+      img.remove();
+    }
+  }, true);
 }
 
 // ===== MOBILE MENU =====
@@ -155,11 +176,77 @@ function initScrollAnimations() {
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.section-title, .section-subtitle, .category-card, .why-card, .product-card, .blog-card').forEach(el => {
-    // Anything the lift engine drives runs its own reveal.
-    if (el.hasAttribute('data-lift') || el.closest('[data-lift-group]')) return;
+    // Anything the lift engine drives runs its own reveal — including
+    // children of a block that lifts as a single unit.
+    if (el.closest('[data-lift], [data-lift-group]')) return;
     el.classList.add('fade-in');
     observer.observe(el);
   });
+}
+
+// ===== PRODUCT IMAGERY =====
+// Unsplash ids resolve against their CDN, which crops and resizes on the fly,
+// so the browser only ever downloads the size it will paint. Any other value
+// is passed through untouched as a path, which makes swapping in your own
+// shoot a one-field edit in PRODUCT_PHOTOS.
+const PHOTO_WIDTHS = [400, 600, 900, 1300];
+const PHOTO_RATIO = 1.25; // 4:5 portrait, the shape apparel photography wants
+
+function photoUrl(photo, width, ratio = PHOTO_RATIO) {
+  if (!photo.id.startsWith('photo-')) return photo.id;
+  const height = Math.round(width * ratio);
+  return `https://images.unsplash.com/${photo.id}?auto=format&fit=crop&crop=entropy&w=${width}&h=${height}&q=72`;
+}
+
+function photoSrcset(photo, ratio = PHOTO_RATIO) {
+  if (!photo.id.startsWith('photo-')) return '';
+  return PHOTO_WIDTHS.map(w => `${photoUrl(photo, w, ratio)} ${w}w`).join(', ');
+}
+
+// Shop By Category tiles are wide rather than tall, so they crop landscape.
+const CATEGORY_RATIO = 0.72;
+
+// The emoji stays in the markup as the fallback here too: if the photo fails,
+// has-photo comes off the card and the icon is visible again.
+function renderCategoryImages() {
+  if (typeof CATEGORY_PHOTOS === 'undefined') return;
+  document.querySelectorAll('.category-card[data-category]').forEach(card => {
+    const photo = CATEGORY_PHOTOS[card.dataset.category];
+    if (!photo || card.querySelector('.category-photo')) return;
+
+    const img = document.createElement('img');
+    img.className = 'category-photo';
+    img.src = photoUrl(photo, 600, CATEGORY_RATIO);
+    img.srcset = photoSrcset(photo, CATEGORY_RATIO);
+    img.sizes = '(max-width: 700px) 88vw, (max-width: 1100px) 46vw, 400px';
+    img.alt = '';           // decorative: the card already carries its name
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    card.prepend(img);
+    card.classList.add('has-photo');
+  });
+}
+
+function getPhotos(product) {
+  return (typeof PRODUCT_PHOTOS !== 'undefined' && PRODUCT_PHOTOS[product.id]) || [];
+}
+
+// The emoji stays in the markup underneath as the fallback: if a photo fails
+// to load it is hidden and the original icon shows through.
+function productMedia(product, sizes) {
+  return getPhotos(product).slice(0, 2).map((photo, i) => `
+        <img class="product-photo${i === 1 ? ' product-photo-alt' : ''}"
+             src="${photoUrl(photo, 600)}"
+             srcset="${photoSrcset(photo)}"
+             sizes="${sizes}"
+             alt="${i === 0 ? product.name : product.name + ' — alternate view'}"
+             loading="lazy" decoding="async">`).join('');
+}
+
+function photoCredit(photo) {
+  if (!photo || !photo.user) return '';
+  const ref = '?utm_source=fitflex&utm_medium=referral';
+  return `Photo by <a href="https://unsplash.com/@${photo.user}${ref}" target="_blank" rel="noopener noreferrer">${photo.by}</a> on <a href="https://unsplash.com${ref}" target="_blank" rel="noopener noreferrer">Unsplash</a>`;
 }
 
 // ===== PRODUCT RENDERING =====
@@ -168,6 +255,7 @@ function createProductCard(product) {
     <a href="#" class="product-card" data-page="product" data-product-id="${product.id}">
       <div class="product-image" style="background: ${product.color}">
         <span class="product-emoji">${product.image}</span>
+        ${productMedia(product, '(max-width: 700px) 88vw, (max-width: 1100px) 44vw, 380px')}
         ${product.badge ? `<span class="product-badge ${product.badge}">${product.badge === 'bestseller' ? '🔥 Best Seller' : '✨ New'}</span>` : ''}
       </div>
       <div class="product-info">
@@ -263,13 +351,29 @@ function renderProductDetail() {
   const p = state.currentProduct;
   if (!p) return;
 
+  const photos = getPhotos(p);
   const container = document.getElementById('product-detail');
   container.innerHTML = `
     <a href="#" data-page="shop" class="breadcrumb">← Back to Shop</a>
     <div class="product-detail-layout">
-      <div class="product-detail-image" style="background: ${p.color}">
-        <span class="product-emoji-large">${p.image}</span>
-        ${p.badge ? `<span class="product-badge ${p.badge}">${p.badge === 'bestseller' ? '🔥 Best Seller' : '✨ New'}</span>` : ''}
+      <div class="product-detail-media">
+        <div class="product-detail-image" style="background: ${p.color}">
+          <span class="product-emoji-large">${p.image}</span>
+          ${photos.length ? `<img class="product-photo" id="detail-photo"
+               src="${photoUrl(photos[0], 900)}"
+               srcset="${photoSrcset(photos[0])}"
+               sizes="(max-width: 900px) 92vw, 560px"
+               alt="${p.name}" decoding="async">` : ''}
+          ${p.badge ? `<span class="product-badge ${p.badge}">${p.badge === 'bestseller' ? '🔥 Best Seller' : '✨ New'}</span>` : ''}
+        </div>
+        ${photos.length > 1 ? `
+        <div class="product-gallery" id="product-gallery">
+          ${photos.map((ph, i) => `
+            <button type="button" class="gallery-thumb${i === 0 ? ' active' : ''}" data-photo-index="${i}" aria-label="View photo ${i + 1} of ${photos.length}">
+              <img src="${photoUrl(ph, 200)}" alt="" loading="lazy" decoding="async">
+            </button>`).join('')}
+        </div>` : ''}
+        ${photos.length ? `<p class="photo-credit" id="photo-credit">${photoCredit(photos[0])}</p>` : ''}
       </div>
       <div class="product-detail-info">
         <span class="product-category-tag">${p.category} · ${p.gender}</span>
@@ -322,6 +426,22 @@ function renderProductDetail() {
       </div>
     </div>
   `;
+
+  // Gallery
+  const detailPhoto = document.getElementById('detail-photo');
+  const creditLine = document.getElementById('photo-credit');
+  container.querySelectorAll('.gallery-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const photo = photos[parseInt(thumb.dataset.photoIndex)];
+      if (!photo || !detailPhoto) return;
+      container.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      detailPhoto.classList.remove('failed');
+      detailPhoto.srcset = photoSrcset(photo);
+      detailPhoto.src = photoUrl(photo, 900);
+      if (creditLine) creditLine.innerHTML = photoCredit(photo);
+    });
+  });
 
   // Size selection
   container.querySelectorAll('.size-btn').forEach(btn => {
@@ -539,7 +659,10 @@ function renderBlogPosts(filterCat = 'all') {
     </a>
   `).join('');
 
-  // Blog filter buttons
+  if (window.Lifts) Lifts.scan();
+}
+
+function initBlogFilters() {
   document.querySelectorAll('.blog-filter').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.blog-filter').forEach(b => b.classList.remove('active'));
@@ -547,7 +670,6 @@ function renderBlogPosts(filterCat = 'all') {
       renderBlogPosts(btn.dataset.blogCat);
     });
   });
-  if (window.Lifts) Lifts.scan();
 }
 
 function renderBlogPostDetail() {
@@ -636,76 +758,130 @@ function initCursorEffects() {
   // 3D tilt + inner glow on interactive cards (homepage only)
   const tiltSelectors = '.category-card, #page-home .product-card, .why-card, .newsletter-card';
 
-  document.addEventListener('mousemove', (e) => {
+  // Every pass settles every element rather than only the ones under the
+  // cursor: a card the pointer has left has its tilt cleared, a particle out
+  // of range returns to rest. Nothing is left holding a pose because a leave
+  // event never arrived — which is what happens when the pointer exits the
+  // window, when the page scrolls out from under it, or when the cursor moves
+  // between two children of the same card.
+  const pointer = { x: 0, y: 0, active: false };
+  let queued = false;
+
+  function clearCard(card) {
+    if (!card.style.transform) return;
+    card.style.transform = '';
+    card.style.removeProperty('--mouse-x');
+    card.style.removeProperty('--mouse-y');
+  }
+
+  function clearParticle(particle) {
+    if (!particle.style.transform) return;
+    particle.style.transform = '';
+    particle.style.opacity = '';
+    particle.style.boxShadow = '';
+  }
+
+  function apply() {
     const homePage = document.getElementById('page-home');
-    if (!homePage || !homePage.classList.contains('active')) return;
+    const live = pointer.active && homePage && homePage.classList.contains('active');
+    const hero = document.getElementById('hero-section');
 
-    // Handle card tilt + radial glow position
-    const cards = homePage.querySelectorAll(tiltSelectors);
-    cards.forEach(card => {
+    // Nothing to track: send everything home and skip the geometry reads.
+    if (!live) {
+      document.querySelectorAll(tiltSelectors).forEach(clearCard);
+      if (hero) hero.querySelectorAll('.particle').forEach(clearParticle);
+      return;
+    }
+
+    homePage.querySelectorAll(tiltSelectors).forEach(card => {
       const rect = card.getBoundingClientRect();
-      const cardCenterX = rect.left + rect.width / 2;
-      const cardCenterY = rect.top + rect.height / 2;
-      const distX = e.clientX - cardCenterX;
-      const distY = e.clientY - cardCenterY;
-      const dist = Math.sqrt(distX * distX + distY * distY);
+      const relX = pointer.x - rect.left;
+      const relY = pointer.y - rect.top;
+      const inside = relX >= 0 && relX <= rect.width && relY >= 0 && relY <= rect.height;
 
-      // Only tilt if cursor is reasonably close to the card
-      if (dist < 500) {
-        const relX = e.clientX - rect.left;
-        const relY = e.clientY - rect.top;
-        const percX = (relX / rect.width) * 100;
-        const percY = (relY / rect.height) * 100;
-
-        // Set CSS custom properties for the radial glow pseudo-element
-        card.style.setProperty('--mouse-x', percX + '%');
-        card.style.setProperty('--mouse-y', percY + '%');
-
-        // 3D tilt (only when actually hovering)
-        if (relX >= 0 && relX <= rect.width && relY >= 0 && relY <= rect.height) {
-          const tiltX = ((relY / rect.height) - 0.5) * -10; // rotate around X axis
-          const tiltY = ((relX / rect.width) - 0.5) * 10;  // rotate around Y axis
-          card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
-        }
+      if (!inside) {
+        clearCard(card);
+        return;
       }
+
+      // Radial glow follows the cursor across the card
+      card.style.setProperty('--mouse-x', (relX / rect.width) * 100 + '%');
+      card.style.setProperty('--mouse-y', (relY / rect.height) * 100 + '%');
+
+      const tiltX = ((relY / rect.height) - 0.5) * -10; // rotate around X axis
+      const tiltY = ((relX / rect.width) - 0.5) * 10;  // rotate around Y axis
+      card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
     });
 
     // Particles react to cursor in hero
-    const hero = document.getElementById('hero-section');
-    if (hero) {
-      const heroRect = hero.getBoundingClientRect();
-      if (e.clientY < heroRect.bottom) {
-        const particles = hero.querySelectorAll('.particle');
-        particles.forEach(p => {
-          const pRect = p.getBoundingClientRect();
-          const px = pRect.left + pRect.width / 2;
-          const py = pRect.top + pRect.height / 2;
-          const dx = e.clientX - px;
-          const dy = e.clientY - py;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 250) {
-            const pushX = (dx / d) * 15;
-            const pushY = (dy / d) * 15;
-            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-            p.style.transform = `translate(${pushX}px, ${pushY}px) scale(1.8)`;
-            p.style.opacity = '0.9';
-            p.style.boxShadow = isLight ? '0 0 12px rgba(0,0,0,0.4)' : '0 0 12px rgba(255,255,255,0.6)';
-          } else {
-            p.style.transform = '';
-            p.style.opacity = '';
-            p.style.boxShadow = '';
-          }
-        });
+    if (!hero) return;
+    const heroRect = hero.getBoundingClientRect();
+    const inHero = pointer.y >= heroRect.top && pointer.y < heroRect.bottom;
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
+    hero.querySelectorAll('.particle').forEach(particle => {
+      if (!inHero) {
+        clearParticle(particle);
+        return;
       }
+      const pRect = particle.getBoundingClientRect();
+      const dx = pointer.x - (pRect.left + pRect.width / 2);
+      const dy = pointer.y - (pRect.top + pRect.height / 2);
+      const d = Math.sqrt(dx * dx + dy * dy);
+
+      if (d >= 250 || d === 0) {
+        clearParticle(particle);
+        return;
+      }
+      particle.style.transform = `translate(${(dx / d) * 15}px, ${(dy / d) * 15}px) scale(1.8)`;
+      particle.style.opacity = '0.9';
+      particle.style.boxShadow = isLight ? '0 0 12px rgba(0,0,0,0.4)' : '0 0 12px rgba(255,255,255,0.6)';
+    });
+  }
+
+  function request() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; apply(); });
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    pointer.x = e.clientX;
+    pointer.y = e.clientY;
+    pointer.active = true;
+    request();
+  });
+
+  // The pointer left the window entirely: relatedTarget is null on the way out.
+  document.addEventListener('mouseout', (e) => {
+    if (e.relatedTarget === null) {
+      pointer.active = false;
+      request();
     }
   });
 
-  // Reset tilt when mouse leaves a card
-  document.addEventListener('mouseout', (e) => {
-    const card = e.target.closest(tiltSelectors);
-    if (card) {
-      card.style.transform = '';
-    }
+  // Losing focus (alt-tab, devtools) ends the hover just as leaving does.
+  window.addEventListener('blur', () => {
+    pointer.active = false;
+    request();
+  });
+
+  // Scrolling moves cards out from under a stationary cursor, so re-settle
+  // against the last known pointer position.
+  window.addEventListener('scroll', request, { passive: true });
+}
+
+// Called when a page swap happens, so nothing carries a tilt across pages.
+function resetCursorEffects() {
+  document.querySelectorAll('.category-card, .product-card, .why-card, .newsletter-card').forEach(card => {
+    card.style.transform = '';
+    card.style.removeProperty('--mouse-x');
+    card.style.removeProperty('--mouse-y');
+  });
+  document.querySelectorAll('.particle').forEach(particle => {
+    particle.style.transform = '';
+    particle.style.opacity = '';
+    particle.style.boxShadow = '';
   });
 }
 

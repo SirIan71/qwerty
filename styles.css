@@ -805,7 +805,7 @@ img {
   text-align: center;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s ease;
+  transition: transform 0.2s ease, border-color 0.3s ease;
 }
 
 .newsletter-card::before {
@@ -2883,4 +2883,240 @@ body {
   .rep-hud { display: none; }
 
   .logo-icon { animation: none; }
+}
+
+
+/* ============================================================
+   PRODUCT PHOTOGRAPHY
+   Cards hold two stacked shots. The first is what you see at
+   rest; hover cross-fades to the second so the piece reads as
+   something a person wears, not a flat-lay.
+   ============================================================ */
+.product-image {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.product-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.55s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-photo-alt {
+  opacity: 0;
+}
+
+.product-card:hover .product-photo-alt {
+  opacity: 1;
+}
+
+.product-card:hover .product-photo {
+  transform: scale(1.05);
+}
+
+/* A photo that 404s steps aside for the emoji underneath it */
+.product-photo.failed {
+  display: none;
+}
+
+/* Lift the badge and a legibility scrim above the photography */
+.product-image .product-badge {
+  z-index: 3;
+}
+
+.product-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(8, 9, 11, 0.32) 0%, transparent 34%, transparent 62%, rgba(8, 9, 11, 0.5) 100%);
+}
+
+/* DETAIL GALLERY */
+.product-detail-media {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.product-detail-image {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.product-gallery {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.gallery-thumb {
+  width: 72px;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-thumb:hover {
+  border-color: rgba(217, 255, 61, 0.5);
+}
+
+.gallery-thumb.active {
+  border-color: var(--volt);
+  box-shadow: 0 0 0 1px var(--volt), 0 0 14px var(--volt-glow);
+}
+
+.photo-credit {
+  font-size: 0.68rem;
+  color: var(--gray-500);
+  letter-spacing: 0.3px;
+}
+
+.photo-credit a {
+  color: var(--gray-400);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.photo-credit a:hover {
+  color: var(--volt-ink);
+}
+
+[data-theme="light"] .gallery-thumb {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .product-image::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, transparent 34%, transparent 66%, rgba(0, 0, 0, 0.32) 100%);
+}
+
+/* Touch devices get no hover, so show the alternate shot in the gallery only */
+@media (hover: none) {
+  .product-card:hover .product-photo {
+    transform: none;
+  }
+
+  .product-photo-alt {
+    display: none;
+  }
+}
+
+
+/* ============================================================
+   CATEGORY PHOTOGRAPHY
+   The Shop By Category tiles carry a real shot behind the label.
+   Stacking, bottom up: photo, scrim, cursor glow, text.
+   ============================================================ */
+.category-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.category-card.has-photo {
+  min-height: 240px;
+  justify-content: flex-end;
+  background: var(--gray-950);
+  padding: 1.6rem 1.4rem 1.4rem;
+}
+
+.category-card.has-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(8, 9, 11, 0.28) 0%, rgba(8, 9, 11, 0.5) 42%, rgba(8, 9, 11, 0.9) 100%);
+}
+
+/* Keep the cursor glow above the scrim */
+.category-card::before {
+  z-index: 2;
+}
+
+.category-card.has-photo h3,
+.category-card.has-photo p {
+  position: relative;
+  z-index: 3;
+}
+
+/* The scrim is dark in both themes, so the label stays light in both */
+.category-card.has-photo h3 {
+  color: #f2f4f0;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+}
+
+.category-card.has-photo p {
+  color: rgba(242, 244, 240, 0.74);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.category-card.has-photo .category-icon {
+  display: none;
+}
+
+.category-card.has-photo:hover .category-photo {
+  transform: scale(1.07);
+}
+
+.category-card.has-photo:hover::after {
+  background: linear-gradient(180deg, rgba(8, 9, 11, 0.2) 0%, rgba(8, 9, 11, 0.42) 42%, rgba(8, 9, 11, 0.88) 100%);
+}
+
+@media (max-width: 700px) {
+  .category-card.has-photo {
+    min-height: 200px;
+  }
+}
+
+
+/* ============================================================
+   ORPHAN CATEGORY TILE
+   Seven categories leave one card alone on the final row. Centre
+   it — but only while the row it sits on actually has spare
+   columns beside it, and only when it really is the odd one out.
+   The nth-child guards mean an eighth category switches this off
+   by itself rather than stranding the rule.
+   ============================================================ */
+
+/* Desktop: three columns, so drop it into the middle one */
+@media (min-width: 769px) {
+  .categories-grid > .category-card:last-child:nth-child(3n + 1) {
+    grid-column: 2;
+  }
+}
+
+/* Tablet: two columns, so span both and centre at one column's width */
+@media (min-width: 481px) and (max-width: 768px) {
+  .categories-grid > .category-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 0.75rem); /* half the row, less half the 1.5rem gap */
+  }
 }

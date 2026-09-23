@@ -426,3 +426,82 @@ const BLOG_POSTS = [
     `
   }
 ];
+
+// ===== PRODUCT PHOTOGRAPHY =====
+// On-model and studio shots keyed by product id. The first entry is the shot
+// the card shows at rest; the second is what it swaps to on hover, so a
+// visitor sees the piece on a person before they ever open the product page.
+//
+// These are real photographs from Unsplash, free for commercial use. They are
+// stock models in comparable training wear, NOT customers photographed in
+// these exact products — so never caption them as customer photos.
+//
+// To drop in your own shoot: replace `id` with a path under /images (the URL
+// builder passes anything that isn't an Unsplash `photo-*` id straight
+// through) and delete the `by`/`user` credit.
+// One representative shot per category for the Shop By Category grid. These
+// are drawn from the audited PRODUCT_PHOTOS set above, so they carry the same
+// licence and the same no-competitor-branding check.
+const CATEGORY_PHOTOS = {
+  headwear:    { id: 'photo-1531891437562-4301cf35b7e4', by: 'Jeffery Erhunse', user: 'xoutcastx' },
+  handwear:    { id: 'photo-1570440828843-ccc432c6fad7', by: 'Ivan Samkov', user: 'crazyivan_ita' },
+  upperwear:   { id: 'photo-1627063383848-990b09ca1617', by: 'Norbert Buduczki', user: 'buduczki' },
+  lowerwear:   { id: 'photo-1789110853564-23a6b1d206e7', by: 'engin akyurt', user: 'enginakyurt' },
+  footwear:    { id: 'photo-1656164753657-8ff832063a71', by: 'HamZa NOUASRIA', user: 'hamza01nsr' },
+  accessories: { id: 'photo-1758542988969-39a10168b2ce', by: 'kimia kazemi', user: 'kimick' },
+  nutrition:   { id: 'photo-1774793476621-b892f589d4d8', by: 'Alex Saks', user: 'alexsaks' }
+};
+
+const PRODUCT_PHOTOS = {
+  // HEADWEAR
+  1: [{ id: 'photo-1531891437562-4301cf35b7e4', by: 'Jeffery Erhunse', user: 'xoutcastx' }, { id: 'photo-1600486913747-55e5470d6f40', by: 'Jeffrey Keenan', user: 'jeffreykeenan' }],
+  2: [{ id: 'photo-1594269807754-7b7926246d65', by: 'LOGAN WEAVER', user: 'lgnwvr' }, { id: 'photo-1764971590992-6cb000c079ac', by: 'Devin Santiago', user: 'ydcphotography' }],
+  3: [{ id: 'photo-1772678595090-99041b8a30f5', by: 'Jadon Johnson', user: 'jadonjohnson' }, { id: 'photo-1614591083208-1a41e63c544b', by: 'Kouch Peydeh', user: 'kouchpeydeh' }],
+
+  // HANDWEAR
+  4: [{ id: 'photo-1517963879433-6ad2b056d712', by: 'Victor Freitas', user: 'victorfreitas' }, { id: 'photo-1570440828843-ccc432c6fad7', by: 'Ivan Samkov', user: 'crazyivan_ita' }],
+  5: [{ id: 'photo-1582852567809-a25c21a13ee6', by: 'LOGAN WEAVER', user: 'lgnwvr' }, { id: 'photo-1674723628778-0ee597c7db89', by: 'Dropfast Collective', user: 'dropfastcollective' }],
+  6: [{ id: 'photo-1544221639-486f40977942', by: 'Javier Segura', user: 'javiersegura' }, { id: 'photo-1526409499567-9f0af1fcb6d1', by: 'Victor Freitas', user: 'victorfreitas' }],
+
+  // UPPERWEAR — MEN
+  7: [{ id: 'photo-1627063383848-990b09ca1617', by: 'Norbert Buduczki', user: 'buduczki' }, { id: 'photo-1762108670042-73e4d40e2eae', by: 'Laura Oliveira', user: 'lauraaoliveira' }],
+  8: [{ id: 'photo-1765045768265-e3eb8471fce3', by: 'Vanishing Point Images', user: 'vanishing_point_images' }, { id: 'photo-1762108669600-d86eb3342c6d', by: 'Laura Oliveira', user: 'lauraaoliveira' }],
+  9: [{ id: 'photo-1763740350607-4bdde7db691c', by: 'Praise Judah', user: 'pjayth3kreator' }, { id: 'photo-1594434533270-b8d7524b3728', by: 'Ilias Chebbi', user: 'ilias_cgb' }],
+  10: [{ id: 'photo-1615320876716-0fc796a5010f', by: 'Mihajlo Šebalj', user: 'photo_diary' }, { id: 'photo-1614214191247-5b2d3a734f1b', by: 'Sonny Mauricio', user: 'northernstatemedia' }],
+
+  // UPPERWEAR — WOMEN
+  11: [{ id: 'photo-1768929035644-6e146b35acd8', by: 'gabbiistudios', user: 'gabrielonodegba' }, { id: 'photo-1583486791623-57f75eb2d4a9', by: 'engin akyurt', user: 'enginakyurt' }],
+  12: [{ id: 'photo-1581423880338-b9e4f9718df6', by: 'engin akyurt', user: 'enginakyurt' }, { id: 'photo-1645810798586-08e892108d67', by: 'Taylor Daugherty', user: 'tayloradaugherty' }],
+  13: [{ id: 'photo-1776152615755-8fc00c81a4ee', by: 'Margo Evardson', user: 'stadinstudio' }, { id: 'photo-1635862641294-5d3d7438c942', by: 'April Laugh', user: 'aprillaugh' }],
+  14: [{ id: 'photo-1768929096117-c0b04a7c8fc2', by: 'gabbiistudios', user: 'gabrielonodegba' }, { id: 'photo-1768929096172-ca7a26ce9630', by: 'gabbiistudios', user: 'gabrielonodegba' }],
+
+  // LOWERWEAR — MEN
+  15: [{ id: 'photo-1605296866985-34ba3c0b527b', by: 'Alexander Redl', user: 'visualsbyroyalz' }, { id: 'photo-1579758682665-53a1a614eea6', by: 'Alexander Redl', user: 'visualsbyroyalz' }],
+  16: [{ id: 'photo-1590841531190-bc3b36c9000a', by: 'Ithiel Papatua', user: 'ithielpapatua' }, { id: 'photo-1574368017905-f58e0d62dcf4', by: 'Vechorko', user: 'vechorko' }],
+  17: [{ id: 'photo-1597892657493-6847b9640bac', by: 'Jakob Owens', user: 'jakobowens1' }, { id: 'photo-1781914579259-fedb01e085ba', by: 'Andrii V', user: 'andrvv21' }],
+
+  // LOWERWEAR — WOMEN
+  18: [{ id: 'photo-1789110853564-23a6b1d206e7', by: 'engin akyurt', user: 'enginakyurt' }, { id: 'photo-1768929096133-1748d1fe5944', by: 'gabbiistudios', user: 'gabrielonodegba' }],
+  19: [{ id: 'photo-1635863872991-040c52b4cfbe', by: 'April Laugh', user: 'aprillaugh' }, { id: 'photo-1628970841397-cf0b52a1a1ca', by: 'April Laugh', user: 'aprillaugh' }],
+  20: [{ id: 'photo-1606902965551-dce093cda6e7', by: 'Julia Rekamie', user: 'juliarekamie' }, { id: 'photo-1768929096134-f45af7839e83', by: 'gabbiistudios', user: 'gabrielonodegba' }],
+
+  // FOOTWEAR
+  21: [{ id: 'photo-1656164753657-8ff832063a71', by: 'HamZa NOUASRIA', user: 'hamza01nsr' }, { id: 'photo-1671321787003-1a83df5c261c', by: 'Tim Bish', user: 'tjsocoz' }],
+  22: [{ id: 'photo-1680759170087-3c4659fa9244', by: 'Dropfast Collective', user: 'dropfastcollective' }, { id: 'photo-1680759170077-e9e2d838a34c', by: 'Dropfast Collective', user: 'dropfastcollective' }],
+  23: [{ id: 'photo-1656230259229-aa2634e3352c', by: 'HamZa NOUASRIA', user: 'hamza01nsr' }, { id: 'photo-1656164603279-b989e21168ba', by: 'HamZa NOUASRIA', user: 'hamza01nsr' }],
+  24: [{ id: 'photo-1580973757787-e22cdecb9cd5', by: 'Sandy Millar', user: 'sandym10' }, { id: 'photo-1776860850757-a12ec6e457e2', by: 'Brett Wharton', user: 'brettwharton' }],
+
+  // ACCESSORIES
+  25: [{ id: 'photo-1758542988969-39a10168b2ce', by: 'kimia kazemi', user: 'kimick' }, { id: 'photo-1774560745344-78667b3594a7', by: 'Charles P', user: 'charlesp25' }],
+  26: [{ id: 'photo-1532382708467-d720b918f0da', by: 'Alora Griffiths', user: 'aloragriffiths' }, { id: 'photo-1541600383005-565c949cf777', by: 'Alora Griffiths', user: 'aloragriffiths' }],
+  27: [{ id: 'photo-1664714628878-9d2aa898b9e3', by: 'Personal Graphic', user: 'personal_graphic' }, { id: 'photo-1605714312496-01e90cb509cc', by: 'Vanesa Giaconi', user: 'vanesagiaconi' }],
+  28: [{ id: 'photo-1584735935682-2f2b69dff9d2', by: 'Kelly Sikkema', user: 'kellysikkema' }, { id: 'photo-1584827386916-b5351d3ba34b', by: 'Delaney Van', user: 'delaneyvan' }],
+
+  // NUTRITION — studio shots; nobody "wears" a tub of creatine
+  29: [{ id: 'photo-1593095948071-474c5cc2989d', by: 'How To Gym', user: 'howtogym' }, { id: 'photo-1524649876414-7ca0bcd8b3ff', by: 'Dewang Gupta', user: 'dewang' }],
+  30: [{ id: 'photo-1774793476621-b892f589d4d8', by: 'Alex Saks', user: 'alexsaks' }, { id: 'photo-1593095948071-474c5cc2989d', by: 'How To Gym', user: 'howtogym' }],
+  31: [{ id: 'photo-1611255941896-6b308557742a', by: 'Diana Polekhina', user: 'diana_pole' }, { id: 'photo-1524649876414-7ca0bcd8b3ff', by: 'Dewang Gupta', user: 'dewang' }],
+  32: [{ id: 'photo-1524649876414-7ca0bcd8b3ff', by: 'Dewang Gupta', user: 'dewang' }, { id: 'photo-1611255941896-6b308557742a', by: 'Diana Polekhina', user: 'diana_pole' }],
+  33: [{ id: 'photo-1611242404332-79e8147aebf4', by: 'Kelly Sikkema', user: 'kellysikkema' }, { id: 'photo-1774793476621-b892f589d4d8', by: 'Alex Saks', user: 'alexsaks' }],
+  34: [{ id: 'photo-1633360821154-1935fb5671e6', by: 'Towfiqu barbhuiya', user: 'towfiqu999999' }, { id: 'photo-1626697556651-67ebdcb8cbd6', by: 'Towfiqu barbhuiya', user: 'towfiqu999999' }]
+};
