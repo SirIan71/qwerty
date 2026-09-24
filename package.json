@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "npx serve . -l ${PORT:-3000}",
-    "dev": "npx serve . -l 3000"
+    "dev": "npx serve . -l 3000",
+    "flex": "vite --port 4173"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
