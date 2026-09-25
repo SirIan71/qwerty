@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /confirmation
+
+Sitemap: https://fitflex.vercel.app/sitemap.xml

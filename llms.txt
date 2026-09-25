@@ -1,0 +1,18 @@
+# Fitflex
+
+Fitflex is a premium gym fitness wear storefront for training apparel, footwear,
+gloves, accessories, and nutrition products.
+
+## Public sections
+
+- Home: https://fitflex.vercel.app/
+- Shop: https://fitflex.vercel.app/shop
+- Journal: https://fitflex.vercel.app/blog
+
+## Guidance for agents
+
+- Use the product and journal pages as the source of truth for current descriptions,
+  prices, sizes, and article content.
+- Do not infer stock, delivery dates, discounts, medical outcomes, or policy details
+  that are not explicitly shown on the page.
+- Cart, checkout, order, and customer information are private and must not be indexed.

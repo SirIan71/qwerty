@@ -1,7 +1,17 @@
 // ===== Fitflex — GYM FITNESS WEAR E-COMMERCE =====
 // App State
+function readStorage(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch (error) {
+    console.warn(`Unable to read ${key} from local storage.`, error);
+    return fallback;
+  }
+}
+
 const state = {
-  cart: JSON.parse(localStorage.getItem('Fitflex_cart')) || [],
+  cart: readStorage('Fitflex_cart', []),
   currentPage: 'home',
   currentProduct: null,
   currentBlogPost: null,
@@ -27,15 +37,36 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursorEffects();
   initThemeToggle();
 
-  // Handle hash routing
-  const hash = window.location.hash.slice(1);
-  if (hash) {
-    const parts = hash.split('/');
-    navigateTo(parts[0], parts[1]);
-  }
+  // Support stable paths for crawlers and retain hash links from older sessions.
+  const route = getRouteFromLocation();
+  navigateTo(route.page, route.id, false);
 });
 
 // ===== NAVIGATION =====
+function slugify(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function getRouteFromLocation() {
+  const path = window.location.pathname.replace(/^\/|\/$/g, '');
+  const segments = path ? path.split('/') : [];
+  if (segments[0] === 'products' && segments[1]) {
+    const product = PRODUCTS.find(p => slugify(p.name) === segments[1]);
+    return product ? { page: 'product', id: String(product.id) } : { page: 'home', id: null };
+  }
+  if (segments[0] === 'journal' && segments[1]) {
+    const post = BLOG_POSTS.find(p => slugify(p.title) === segments[1]);
+    return post ? { page: 'blogpost', id: String(post.id) } : { page: 'home', id: null };
+  }
+  const supportedPages = ['home', 'shop', 'blog', 'cart', 'checkout', 'confirmation'];
+  if (supportedPages.includes(segments[0])) return { page: segments[0], id: null };
+  if (window.location.hash) {
+    const parts = window.location.hash.slice(1).split('/');
+    return { page: parts[0] || 'home', id: parts[1] || null };
+  }
+  return { page: 'home', id: null };
+}
+
 function initNavigation() {
   document.addEventListener('click', (e) => {
     const link = e.target.closest('[data-page]');
@@ -62,13 +93,8 @@ function initNavigation() {
 
   // Back/forward browser navigation
   window.addEventListener('popstate', () => {
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      const parts = hash.split('/');
-      navigateTo(parts[0], parts[1], false);
-    } else {
-      navigateTo('home', null, false);
-    }
+    const route = getRouteFromLocation();
+    navigateTo(route.page, route.id, false);
   });
 }
 
@@ -109,18 +135,43 @@ function navigateTo(page, id, pushState = true) {
     }
   }
 
-  // Update URL hash
+  // Update the URL without forcing a full-page reload. Stable paths are crawlable,
+  // while the hash fallback keeps old shared links working.
   if (pushState) {
-    const hash = id ? `${page}/${id}` : page;
-    window.location.hash = hash;
+    const path = page === 'product' && state.currentProduct
+      ? `/products/${slugify(state.currentProduct.name)}`
+      : page === 'blogpost' && state.currentBlogPost
+        ? `/journal/${slugify(state.currentBlogPost.title)}`
+        : page === 'home' ? '/' : `/${page}`;
+    window.history.pushState({}, '', path);
   }
 
+  updateSeo(page);
   // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   // Close mobile menu
   document.getElementById('nav-links').classList.remove('open');
   document.getElementById('mobile-menu-btn').classList.remove('open');
+  document.getElementById('mobile-menu-btn').setAttribute('aria-expanded', 'false');
+}
+
+function updateSeo(page) {
+  const titles = {
+    home: 'Fitflex — Premium Gym Fitness Wear',
+    shop: 'Shop Performance Fitness Wear | Fitflex',
+    blog: 'The Fitflex Journal | Training, Nutrition & Lifestyle',
+    cart: 'Shopping Cart | Fitflex',
+    checkout: 'Checkout | Fitflex',
+    confirmation: 'Order Confirmed | Fitflex'
+  };
+  document.title = page === 'product' && state.currentProduct
+    ? `${state.currentProduct.name} | Fitflex`
+    : page === 'blogpost' && state.currentBlogPost
+      ? `${state.currentBlogPost.title} | The Fitflex Journal`
+      : titles[page] || document.title;
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) canonical.href = window.location.href.split('#')[0];
 }
 
 // A photo that fails to load hides itself, revealing the emoji placeholder
@@ -144,8 +195,10 @@ function initImageFallback() {
 function initMobileMenu() {
   const btn = document.getElementById('mobile-menu-btn');
   btn.addEventListener('click', () => {
-    btn.classList.toggle('open');
-    document.getElementById('nav-links').classList.toggle('open');
+    const isOpen = btn.classList.toggle('open');
+    document.getElementById('nav-links').classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
   });
 }
 
@@ -252,7 +305,7 @@ function photoCredit(photo) {
 // ===== PRODUCT RENDERING =====
 function createProductCard(product) {
   return `
-    <a href="#" class="product-card" data-page="product" data-product-id="${product.id}">
+    <a href="/products/${slugify(product.name)}" class="product-card" data-page="product" data-product-id="${product.id}">
       <div class="product-image" style="background: ${product.color}">
         <span class="product-emoji">${product.image}</span>
         ${productMedia(product, '(max-width: 700px) 88vw, (max-width: 1100px) 44vw, 380px')}
@@ -339,10 +392,13 @@ function initFilters() {
     renderShopProducts();
   });
   document.getElementById('filter-toggle-btn').addEventListener('click', () => {
-    document.getElementById('shop-sidebar').classList.toggle('open');
+    const sidebar = document.getElementById('shop-sidebar');
+    const isOpen = sidebar.classList.toggle('open');
+    document.getElementById('filter-toggle-btn').setAttribute('aria-expanded', String(isOpen));
   });
   document.getElementById('filter-close-btn').addEventListener('click', () => {
     document.getElementById('shop-sidebar').classList.remove('open');
+    document.getElementById('filter-toggle-btn').setAttribute('aria-expanded', 'false');
   });
 }
 
@@ -507,7 +563,11 @@ function updateCartQty(index, newQty) {
 }
 
 function saveCart() {
-  localStorage.setItem('Fitflex_cart', JSON.stringify(state.cart));
+  try {
+    localStorage.setItem('Fitflex_cart', JSON.stringify(state.cart));
+  } catch (error) {
+    console.warn('Unable to save the cart in local storage.', error);
+  }
 }
 
 function updateCartCount() {
@@ -641,7 +701,7 @@ function renderBlogPosts(filterCat = 'all') {
   let filtered = filterCat === 'all' ? BLOG_POSTS : BLOG_POSTS.filter(b => b.category === filterCat);
 
   container.innerHTML = filtered.map(post => `
-    <a href="#" class="blog-card" data-page="blogpost" data-blog-id="${post.id}">
+    <a href="/journal/${slugify(post.title)}" class="blog-card" data-page="blogpost" data-blog-id="${post.id}">
       <div class="blog-card-image">
         <span class="blog-emoji">${post.image}</span>
         <span class="blog-cat-tag">${post.category}</span>
@@ -705,7 +765,7 @@ function renderBlogPostDetail() {
       <h2>More Articles</h2>
       <div class="blog-grid">
         ${BLOG_POSTS.filter(b => b.id !== post.id && b.category === post.category).slice(0, 3).map(p => `
-          <a href="#" class="blog-card" data-page="blogpost" data-blog-id="${p.id}">
+          <a href="/journal/${slugify(p.title)}" class="blog-card" data-page="blogpost" data-blog-id="${p.id}">
             <div class="blog-card-image"><span class="blog-emoji">${p.image}</span><span class="blog-cat-tag">${p.category}</span></div>
             <div class="blog-card-content">
               <div class="blog-card-meta"><span>${p.date}</span><span>·</span><span>${p.readTime}</span></div>
@@ -891,7 +951,7 @@ function initThemeToggle() {
   if (!toggle) return;
 
   // Load saved theme
-  const savedTheme = localStorage.getItem('Fitflex_theme') || 'dark';
+  const savedTheme = readStorage('Fitflex_theme', 'dark');
   document.documentElement.setAttribute('data-theme', savedTheme);
   updateToggleIcon(toggle, savedTheme);
 
@@ -899,7 +959,11 @@ function initThemeToggle() {
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('Fitflex_theme', next);
+    try {
+      localStorage.setItem('Fitflex_theme', JSON.stringify(next));
+    } catch (error) {
+      console.warn('Unable to save the theme preference in local storage.', error);
+    }
     updateToggleIcon(toggle, next);
   });
 }
