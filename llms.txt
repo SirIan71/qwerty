@@ -5,9 +5,9 @@ gloves, accessories, and nutrition products.
 
 ## Public sections
 
-- Home: https://fitflex.vercel.app/
-- Shop: https://fitflex.vercel.app/shop
-- Journal: https://fitflex.vercel.app/blog
+- Home: https://qwerty-lake-one.vercel.app/
+- Shop: https://qwerty-lake-one.vercel.app/shop
+- Journal: https://qwerty-lake-one.vercel.app/blog
 
 ## Guidance for agents
 

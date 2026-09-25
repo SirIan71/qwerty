@@ -4,4 +4,4 @@ Disallow: /cart
 Disallow: /checkout
 Disallow: /confirmation
 
-Sitemap: https://fitflex.vercel.app/sitemap.xml
+Sitemap: https://qwerty-lake-one.vercel.app/sitemap.xml
